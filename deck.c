@@ -1,4 +1,5 @@
 // deck data structure implementation
+// written by FyRel
 
 #include <stdio.h>
 #include <stdlib.h>

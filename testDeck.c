@@ -1,4 +1,5 @@
-// test file for deck implementation 
+// test file for deck implementation
+// written by FyRel
 
 #include "deck.h"
 #include <stdio.h>

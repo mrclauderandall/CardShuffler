@@ -1,4 +1,5 @@
 // definitions of deck ADT
+// written by FyRel
 
 #define DECK_SIZE 52
 
