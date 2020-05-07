@@ -16,16 +16,176 @@ int main(void) {
 	Deck d = newStandardDeck();
 
 	// show deck
-	//showDeck(d);
+	showDeck(d);
 
-	test_removeCard();
+	// cut the deck
+	Deck l = cutDeck(d, 26);
 
+	// show both decks
+	showDeck(l);
+	showDeck(d);
 
 	// free deck
 	freeDeck(d);
 
 	return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+								SPACE
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 void test_addCard(void) {
@@ -92,7 +252,7 @@ void test_removeCard(void) {
 	Card c = removeCard(d, 0);
 	assert(deckSize(d) == 0);
 	printCard(c);
-*/
+
 	// CASE 3: remove all the cards from a standard deck from the bottom
 	Deck fulldeck = newStandardDeck();
 	int deck_size = deckSize(fulldeck);
@@ -106,6 +266,7 @@ void test_removeCard(void) {
 		showDeck(fulldeck);
 	}
 	printf("\n");
+*/
 }
 
 

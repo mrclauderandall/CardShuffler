@@ -17,7 +17,8 @@ void rifflePerfect(Deck d) {
 	// declare variables
 	int size = d->size / 2;
 
-	// cut the deck		
+	// cut the deck
+	cutDeck(Deck d, int size)
 }
 
 void riffle(Deck d, int kind) {
@@ -142,12 +143,10 @@ Deck cutDeck(Deck d, int size) {
 
 	// loop through removing cards and adding them
 	// to the left deck
-	for (int i = 0; i < size; i++) {
-		Card c = removeCard(d, -1);
-		printf("removed card ");
-		printCard(c);
-		printf("\n");
-		//addCard(c, left, 0);
+	int i = 0;
+	while (i < size && deckSize(d) > 0) {
+		addCard(removeCard(d, -1), left, 0);
+		i++;
 	}
 
 	return left;
