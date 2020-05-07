@@ -22,7 +22,13 @@ Card newCard(char suit, int value) {
 }
 
 void freeCard(Card c) {
-	
+	if (c == NULL) {
+		return;
+	} else {
+		c->above = NULL;
+		c->bellow = NULL;
+		free(c);
+	}
 }
 
 // create a new empty deck
@@ -277,7 +283,7 @@ void freeDeck(Deck d) {
 	while (c != NULL) {
 		Card temp = c;
 		c = c->bellow;
-		free(temp);
+		freeCard(temp);
 	}
 	free(d);
 }

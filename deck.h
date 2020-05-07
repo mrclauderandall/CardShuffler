@@ -23,7 +23,11 @@ struct deck {
 	int size;
 };
 
-// create a new card with the given suit and value
+/*
+	create a new card with the given suit and value
+	note: avoid adding the same card to more than 
+	one deck at a time
+*/
 Card newCard(char suit, int value);
 
 // create a new empty deck

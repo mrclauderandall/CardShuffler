@@ -59,10 +59,26 @@ void test_addCard(void) {
 	assert(d2->top->value == 0);
 	assert(d2->bottom->value == 0);
 
-	// free decks and card
+	// free decks and card 				<<<<<<<<<<<<<<<<<<<<<< for josh to look at
+	showDeck(d1);
+	showDeck(d2);
+
 	freeDeck(d1);
+
+	showDeck(d1);
+	showDeck(d2);
+	
 	freeDeck(d2);
-	free(c);
+
+	showDeck(d1);
+	showDeck(d2);
+
+	freeCard(c);
+
+	showDeck(d1);
+	showDeck(d2);
+
+	printf("test 1 passed\n");
 
 	// CASE 2: add to middle of 2 card deck
 	// create a deck and 3 cards
