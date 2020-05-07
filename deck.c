@@ -147,14 +147,14 @@ void addCard(Card c, Deck d, int pos) {
 	bottom card
 */
 Card removeCard(Deck d, int pos) {
-	if (d->size == 0) {
+	if (deckSize(d) == 0) {
 		printf("cannot remove a card from an empty deck:\ndeck given:\n");
 		showDeck(d);
 		exit(1);
 	}
 
 	// declare variables
-	Card cur =  d->top;
+	Card cur;;
 	int i = 0;
 
 	// check if there is only 1 card and
@@ -162,18 +162,22 @@ Card removeCard(Deck d, int pos) {
 	// and if not remove the positional card
 	if (d->size == 1) {
 		// remove the last card in the deck
+		cur = d->top;
 		d->top = NULL;
 		d->bottom = NULL;
 	} else if (pos == 0) {
 		// unlink top card from card bellow
+		cur = d->top;
 		d->top = d->top->bellow;
 		d->top->above = NULL;
 	} else if (pos < 0 || pos >= d->size) {
 		// unlink bottom card from card above
+		cur = d->bottom;
 		d->bottom = d->bottom->above;
 		d->bottom->bellow = NULL;
 	} else {
 		// loop through to correct card
+		cur = d->top;
 		while (i < pos && cur != NULL) {
 			cur = cur->bellow;
 			i++;
@@ -304,6 +308,27 @@ int cardPosition(Deck d, Card c) {
 	// card was not found, return -1
 	return -1;
 }
+
+int deckSize(Deck d) {
+	if (d == NULL) return 0;
+	
+	return d->size;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

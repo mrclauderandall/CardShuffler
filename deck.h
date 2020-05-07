@@ -33,6 +33,9 @@ Card newCard(char suit, int value);
 // create a new empty deck
 Deck newEmptyDeck(void);
 
+// return size of deck
+int deckSize(Deck d);
+
 // create a new standard ordered deck
 Deck newStandardDeck(void);
 

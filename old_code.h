@@ -233,3 +233,27 @@ Card removeBottomCard(Deck d) {
 	return c;
 }
 */
+Card removeSpecificCard(Deck d, int value, char suit) {
+	// check valid deck
+	if (d == NULL) {
+		printf("invalid deck\n");
+		return NULL;
+	}
+
+	// declare variables
+	Card cur = d->top;
+	Card return_card;
+
+	// loop through deck searching for card
+	while (cur != NULL) {
+		
+		// check if current card is card c
+		if (cur->value == value && cur->suit == suit) {
+			// return position of the card
+			return_c
+		}
+
+		cur = cur->bellow;
+	}
+
+}
