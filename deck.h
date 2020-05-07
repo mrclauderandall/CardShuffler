@@ -44,6 +44,18 @@ Deck newStandardDeck(void);
 */
 Deck addCard(Card c, Deck d, int pos);
 
+/*
+	remove a card from the deck in position pos
+	e.g:
+	0  -> remove top card
+	1  -> remove the card under the top card
+	4  -> remove the 4th card (0 indexed)
+	-1 -> remove bottom card
+	if pos > size of deck, also remove
+	bottom card
+*/
+Card removeCard(Deck d, int pos);
+
 // remove and return the top card from the deck
 Card removeTopCard(Deck d);
 
@@ -62,8 +74,12 @@ void freeDeck(Deck d);
 // check to see if two decks are the same
 bool equivalentDecks(Deck d1, Deck d2);
 
-// riffle shuffle the deck
-//Deck riffle(Deck d, int kind);
+/*
+	search for and return the position of a card in a deck
+	return -1 if the card is not in the deck
+*/
+int cardPosition(Deck d, Card c);
+
 
 
 

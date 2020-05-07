@@ -83,8 +83,8 @@ Deck newStandardDeck(void) {
 Deck addCard(Card c, Deck d, int pos) {
 	// check valid deck and card
 	if (d == NULL || c == NULL) {
-		fprintf(stderr, "couldn't allocate memory for the deck\n");
-		exit(EXIT_FAILURE);
+		printf("addCard: must pass valid deck and card\n");
+		return d;
 	}
 
 	// check if deck is empty
@@ -121,8 +121,8 @@ Deck addCard(Card c, Deck d, int pos) {
 		cur->above = c;
 	}
 
+	// incrament size and return
 	d->size++;
-
 	return d;
 }
 
@@ -159,21 +159,27 @@ Card removeCard(Deck d, int pos) {
 		// unlink top card from card bellow
 		d->top = d->top->bellow;
 		d->top->above = NULL;
-		cur->bellow = NULL;
 	} else if (pos < 0 || pos >= d->size) {
 		// unlink bottom card from card above
 		d->bottom = d->bottom->above;
 		d->bottom->bellow = NULL;
-		c->above = NULL;
-
 	} else {
 		// loop through to correct card
 		while (i < pos && cur != NULL) {
 			cur = cur->bellow;
 			i++;
 		}
+
+		// edit links
+		cur->bellow->above = cur->above;
+		cur->above->bellow = cur->bellow;
 	}
 
+	// unlink cur
+	cur->above = NULL;
+	cur->bellow = NULL;
+
+	// deincrament and return
 	d->size--;
 	return cur;
 }
@@ -302,9 +308,6 @@ void printCard(Card c) {
 	destoy old deck
 */
 
-
-
-
 bool equivalentDecks(Deck d1, Deck d2) {
 
 	// check if same size
@@ -327,7 +330,27 @@ bool equivalentDecks(Deck d1, Deck d2) {
 	return true;
 }
 
+int cardPosition(Deck d, Card c) {
 
+	// declare variables
+	Card cur = d->top;
+	int count = 0;
+
+	// loop through deck searching for card c
+	while (cur != NULL) {
+		
+		// check if current card is card c
+		if (cur->value == c->value && cur->suit == c->suit) {
+			// return position of the card
+			return count;
+		}
+
+		cur = cur->bellow;
+	}
+
+	// card was not found, return -1
+	return -1;
+}
 
 
 
