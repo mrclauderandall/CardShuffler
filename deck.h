@@ -46,7 +46,7 @@ Deck newStandardDeck(void);
 	if pos > size of deck, add card to the bottom
 	of the deck
 */
-Deck addCard(Card c, Deck d, int pos);
+void addCard(Card c, Deck d, int pos);
 
 /*
 	remove a card from the deck in position pos
@@ -59,12 +59,6 @@ Deck addCard(Card c, Deck d, int pos);
 	bottom card
 */
 Card removeCard(Deck d, int pos);
-
-// remove and return the top card from the deck
-Card removeTopCard(Deck d);
-
-// remove and return the bottom card from the deck
-Card removeBottomCard(Deck d);
 
 // print out entire deck to stdin
 void showDeck(Deck d);

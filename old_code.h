@@ -173,3 +173,63 @@ for (int i = 0; i < 52; i++) {
 		d->top->above->bellow = d->top;
 		d->top = d->top->above;
 	}
+
+
+
+
+
+/*
+// remove and return the top card from the deck
+Card removeTopCard(Deck d) {
+
+	if (d->size == 0) return newCard('x', 0);
+
+	// set card c as the top card
+	Card c = d->top;
+
+	// check this is not the last card
+	if (d->top == d->bottom) {
+		c = d->top;
+		d->top = NULL;
+		d->bottom = NULL;
+	} else {
+		// remove links between top card
+		// and the card bellow it
+		d->top->bellow->above = NULL;
+		d->top = d->top->bellow;
+		c->bellow = NULL;
+	}
+
+	// deincrament size of deck
+	d->size--;
+
+	// return the top card
+	return c;
+}
+
+Card removeBottomCard(Deck d) {
+	if (d->size == 0) return newCard('x', 0);
+
+	// set card c as the bottom card
+	Card c = d->bottom;
+
+	// check this is not the last card
+	if (d->top == d->bottom) {
+		//c = d->top;
+		d->top = NULL;
+		d->bottom = NULL;
+	} else {
+		// remove links between bottom card
+		// and the card above it
+		d->bottom = d->bottom->above;
+		d->bottom->bellow = NULL;
+		c->above = NULL;
+	}
+
+	// deincrament size of deck
+	d->size--;
+
+	// return the top card
+	return c;
+}
+*/

@@ -51,7 +51,7 @@ Deck riffle(Deck d, int kind) {
 		c = dd->right->bottom;
 		while (c != NULL) {
 			if ((count % 2) == 0) {
-				insert_card = removeBottomCard(dd->left);
+				insert_card = removeCard(dd->left, -1);
 				insert_card->bellow = c;
 
 				if (c == dd->right->top) {
@@ -134,8 +134,8 @@ DoubleDeck cutDeck(Deck d, int size) {
 	// to the left double deck
 	Card c;													// assumption 2
 	for (int i = 0; i < size; i++) {
-		c = removeBottomCard(d);
-		dd->left = addCard(c, dd->left, 0);
+		c = removeCard(d, -1);
+		addCard(c, dd->left, 0);
 	}
 
 	return dd;

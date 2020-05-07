@@ -82,7 +82,7 @@ Deck newStandardDeck(void) {
 			c = newCard(s, v);
 
 			// add the card to the deck
-			d = addCard(c, d, 0);
+			addCard(c, d, 0);
 		}
 	}
 
@@ -90,11 +90,11 @@ Deck newStandardDeck(void) {
 }
 
 // add a card to a deck
-Deck addCard(Card c, Deck d, int pos) {
+void addCard(Card c, Deck d, int pos) {
 	// check valid deck and card
 	if (d == NULL || c == NULL) {
 		printf("addCard: must pass valid deck and card\n");
-		return d;
+		return;
 	}
 
 	// check if deck is empty
@@ -131,9 +131,8 @@ Deck addCard(Card c, Deck d, int pos) {
 		cur->above = c;
 	}
 
-	// incrament size and return
+	// incrament size
 	d->size++;
-	return d;
 }
 
 
@@ -192,63 +191,6 @@ Card removeCard(Deck d, int pos) {
 	// deincrament and return
 	d->size--;
 	return cur;
-}
-
-
-
-
-// remove and return the top card from the deck
-Card removeTopCard(Deck d) {
-
-	if (d->size == 0) return newCard('x', 0);
-
-	// set card c as the top card
-	Card c = d->top;
-
-	// check this is not the last card
-	if (d->top == d->bottom) {
-		c = d->top;
-		d->top = NULL;
-		d->bottom = NULL;
-	} else {
-		// remove links between top card
-		// and the card bellow it
-		d->top->bellow->above = NULL;
-		d->top = d->top->bellow;
-		c->bellow = NULL;
-	}
-
-	// deincrament size of deck
-	d->size--;
-
-	// return the top card
-	return c;
-}
-
-Card removeBottomCard(Deck d) {
-	if (d->size == 0) return newCard('x', 0);
-
-	// set card c as the bottom card
-	Card c = d->bottom;
-
-	// check this is not the last card
-	if (d->top == d->bottom) {
-		//c = d->top;
-		d->top = NULL;
-		d->bottom = NULL;
-	} else {
-		// remove links between bottom card
-		// and the card above it
-		d->bottom = d->bottom->above;
-		d->bottom->bellow = NULL;
-		c->above = NULL;
-	}
-
-	// deincrament size of deck
-	d->size--;
-
-	// return the top card
-	return c;
 }
 
 // print out entire deck to stdin
@@ -356,6 +298,7 @@ int cardPosition(Deck d, Card c) {
 		}
 
 		cur = cur->bellow;
+		count++;
 	}
 
 	// card was not found, return -1
