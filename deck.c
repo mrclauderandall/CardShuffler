@@ -1,4 +1,4 @@
-// deck data structure by Claude Randalle
+// deck data structure implementation
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,33 +24,6 @@
 	normal usage, a can be left as 0.
 */
 int left_deck(int a);
-
-int main(void) {
-
-	// create a new deck
-	Deck d = newStandardDeck();
-
-	// print the deck
-	printf("original deck:\n");
-	showDeck(d);
-
-	// perfect riffle shuffle deck
-	
-	for (int i = 0; i < 9; i++) {
-		printf("\nriffle shuffling deck:\n");
-		d = riffle(d, 0);
-		showDeck(d);
-	}
-	
-
-	// show deck
-	
-
-	// free deck
-	freeDeck(d);
-
-	return 0;	
-}
 
 Card newCard(char suit, int value) {
 	Card c = malloc(sizeof(*c));

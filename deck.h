@@ -1,4 +1,4 @@
-// implementation of cards
+// definitions of deck ADT
 
 #define DECK_SIZE 52
 
