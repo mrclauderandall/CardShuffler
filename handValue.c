@@ -5,6 +5,7 @@
 #include "deck.h"
 #include <stdint.h>
 #include <inttypes.h>
+#include <math.h>
 
 #define ACE   14
 #define KING  13
@@ -44,9 +45,7 @@ u_int64_t cardPairs = 0x0000000000000000;
 void printbits(u_int64_t number);
 
 /*
-2^(4*i) where i = 0...13 (value of 2 to A)
-
-that value is then multiplied by (2*j) where j == 0..3 (suits)
+2^((4*i)+j) where i = 0...12 (value of 2 to A) and j == 0..3 (suits)
 */
 
 int main(int argc, char* argv[]) {
@@ -63,7 +62,7 @@ int main(int argc, char* argv[]) {
     addCard(c4, d1, 3);
     addCard(c5, d1, 4);
     showDeck(d1);
-    u_int64_t x = 16;
+    u_int64_t x = pow(2,51);
     printbits(x);
     /*
     int i = 1;
