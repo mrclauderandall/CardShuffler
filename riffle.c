@@ -40,6 +40,9 @@ Deck riffle(Deck d, int kind) {
 	// cut the deck
 	dd = cutDeck(d, size);
 
+	printf("dd->left->size = %d\n", dd->left->size);
+	printf("dd->right->size = %d\n", dd->right->size);
+
 	// riffle shuffle deck
 	if (kind == 0) {
 		c = dd->right->bottom;

@@ -12,10 +12,16 @@ int main(void) {
 
 	// show the deck
 	showDeck(d);
-    //one riffle
-    riffle(d, 0);
-    //show the deck riffled
-    showDeck(d);
+    
+	// riffle deck 7 times and show deck after each riffle
+	for (int i = 0; i < 4; i++) {
+		// riffle deck
+    	riffle(d, 0);
+    	
+    	//show the deck riffled
+    	showDeck(d);
+	}
+ 
 	// free deck
 	freeDeck(d);
 
