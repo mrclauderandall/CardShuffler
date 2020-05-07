@@ -1,8 +1,12 @@
 // riffle algorithm implementation
 // written by FyRel
 
+#include <stdbool.h>
+
 #include "deck.h"
 #include "riffle.h"
+
+bool rChance(int a);
 
 void rifflePerfect(Deck d) {
 	// check valid deck
@@ -15,20 +19,40 @@ void rifflePerfect(Deck d) {
 	}
 
 	// declare variables
-	int size = d->size / 2;
+	int size = deckSize(d) / 2;
+	int count = 0;
+	Card insert_card;
 
 	// cut the deck
-	cutDeck(Deck d, int size)
+	Deck l = cutDeck(d, size);
+
+	// initalize cur
+	Card cur = d->bottom;
+
+	// loop through
+	while (cur != NULL) {
+		if ((count % 2) == 0) {
+			insert_card = removeCard(l, -1);
+			insert_card->bellow = cur;
+
+			if (cur == d->top) {
+				cur->above = insert_card;
+				d->top = insert_card;
+			} else {
+				insert_card->above = cur->above;
+				cur->above = insert_card;
+				insert_card->above->bellow = insert_card;
+			}
+
+			d->size++;
+		} 
+
+		cur = cur->above;
+		count++;
+	}
 }
 
-void riffle(Deck d, int kind) {
-
-	/*
-	kind:
-		0 	perfect shuffle
-		1	human like shuffle
-	
-
+void riffleHuman(Deck d) {
 	// check valid deck
 	if (d == NULL) {
 		printf("this deck is empty\n");
@@ -39,66 +63,54 @@ void riffle(Deck d, int kind) {
 	}
 
 	// declare variables
-	int size;
-	int count = 0;
-	DoubleDeck dd;
-	Deck return_deck;
-	Card c, insert_card;
-
-	// get size to cut the deck
-	if (kind == 0) {
-		size = 26;
-	} else if (kind == 1) {
-		size = left_deck(0);
-	} else {
-		printf("[riffle] must specifiy kind of riffle shuffle\n0	perfect shuffle\n1	human life inperfect shuffle\n");
-		exit(1);
-	}
+	int size = leftDeckSize(0);
+	int a = 0;
+	Card insert_card;
 
 	// cut the deck
-	dd = cutDeck(d, size);
+	Deck l = cutDeck(d, size);
 
-	printf("dd->left:  ");
-	showDeck(dd->left);
-	printf("dd->right: ");
-	showDeck(dd->right);
+	// initalize cur
+	Card cur = d->bottom;
 
-	// riffle shuffle deck
-	if (kind == 0) {
-		c = dd->right->bottom;
-		while (c != NULL) {
-			if ((count % 2) == 0) {
-				insert_card = removeCard(dd->left, -1);
-				insert_card->bellow = c;
+	// loop through
+	while (cur != NULL && deckSize(l) > 0) {
+		if (rChance(a)) {
+			insert_card = removeCard(l, -1);
+			insert_card->bellow = cur;
 
-				if (c == dd->right->top) {
-					c->above = insert_card;
-					dd->right->top = insert_card;
-				} else {
-					insert_card->above = c->above;
-					c->above = insert_card;
-					insert_card->above->bellow = insert_card;
-				}
-
-				dd->right->size++;
+			if (cur == d->top) {
+				cur->above = insert_card;
+				d->top = insert_card;
+			} else {
+				insert_card->above = cur->above;
+				cur->above = insert_card;
+				insert_card->above->bellow = insert_card;
 			}
 
-			c = c->above;
-			count++;
-		}
+			d->size++;
+		} 
+
+		a++;
+		cur = cur->above;
 	}
 
-	// assign d to the right deck
-	d = dd->right;
+	//
+	if (deckSize(l) != 0) {
+		l->bottom->bellow = d->top;
+		d->top->above = l->bottom;
+		d->top = l->top;
+		d->size += deckSize(l);
+	}
 
-	// free double deck structure
-	freeDeck(dd->left);
-	free(dd);
-*/
+	l->size = 0;
+	l->bottom = NULL;
+	l->top = NULL;
+	free(l);
 }
 
 
-int left_deck(int a) {
+int leftDeckSize(int a) {
 
 	// generate random number [0:99]
 	srand(time(NULL) + a);
@@ -152,7 +164,15 @@ Deck cutDeck(Deck d, int size) {
 	return left;
 }
 
+bool rChance(int a) {
+	// generate random number [0:99]
+	srand(time(NULL) + a);
+	int r = rand() % 100;
 
+	if (r < 51) return true;
+
+	return false;
+}
 
 
 

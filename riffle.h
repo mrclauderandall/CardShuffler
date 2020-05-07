@@ -12,7 +12,7 @@
 	'a' is changed between instances. In
 	normal usage, a can be left as 0.
 */
-int left_deck(int a);
+int leftDeckSize(int a);
 
 /*
 	riffle shuffle a deck of cards
@@ -20,8 +20,9 @@ int left_deck(int a);
 		0 	perfect shuffle
 		1	human like shuffle
 */
-void riffle(Deck d, int kind);
+//void riffle(Deck d, int kind);
 void rifflePerfect(Deck d);
+void riffleHuman(Deck d);
 
 /*
 	cut the deck based on the given size. the 

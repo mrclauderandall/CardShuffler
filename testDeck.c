@@ -18,12 +18,20 @@ int main(void) {
 	// show deck
 	showDeck(d);
 
-	// cut the deck
-	Deck l = cutDeck(d, 26);
+	// riffle shuffle deck
+	riffleHuman(d);
+	riffleHuman(d);
+	riffleHuman(d);
+	riffleHuman(d);
+	riffleHuman(d);
+	riffleHuman(d);
+	riffleHuman(d);
+	riffleHuman(d);
+	riffleHuman(d);
 
-	// show both decks
-	showDeck(l);
+	// show deck
 	showDeck(d);
+	printf("size = %d\n", deckSize(d));
 
 	// free deck
 	freeDeck(d);
