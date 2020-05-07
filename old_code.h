@@ -120,3 +120,40 @@ for (int i = 0; i < 52; i++) {
 					c->above = insert_card;
 					insert_card->above->bellow = insert_card;
 				}
+
+
+
+
+
+	// print the deck
+	printf("original deck:\n");
+	showDeck(d);
+
+	// perfect riffle shuffle deck
+	
+	for (int i = 0; i < 9; i++) {
+		printf("\nriffle shuffling deck:\n");
+		d = riffle(d, 0);
+		showDeck(d);
+	}
+	
+
+	// show deck
+	
+
+
+
+
+
+
+	// old	
+
+	// add card to the top of the deck
+	if (d->top == NULL) {
+		d->top = c;
+		d->bottom = c;
+	} else {
+		d->top->above = c;
+		d->top->above->bellow = d->top;
+		d->top = d->top->above;
+	}

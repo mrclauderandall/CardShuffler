@@ -1,14 +1,7 @@
 // deck data structure implementation
 // written by FyRel
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <math.h>
-#include <unistd.h>
-
 #include "deck.h"
-
 
 // * * * helper functions * * *
 
@@ -93,7 +86,7 @@ Deck newStandardDeck(void) {
 			c = newCard(s, v);
 			
 			// add the card to the deck
-			d = addCard(c, d);
+			d = addCard(c, d, 0);
 		}
 	}
 
@@ -101,26 +94,47 @@ Deck newStandardDeck(void) {
 }
 
 // add a card to a deck
-Deck addCard(Card c, Deck d) {
+Deck addCard(Card c, Deck d, int pos) {
 	// check valid deck and card
 	if (d == NULL || c == NULL) {
 		fprintf(stderr, "couldn't allocate memory for the deck\n");
 		exit(EXIT_FAILURE);
 	}
 
-	// set up a curr
-	//Card cur = NULL;
-
-	// add card to the top of the deck
+	// check if deck is empty
 	if (d->top == NULL) {
 		d->top = c;
 		d->bottom = c;
-	} else {
+	} else if (pos == 0) {
+		// insert card at top of deck
 		d->top->above = c;
 		d->top->above->bellow = d->top;
-		d->top = d->top->above;
+		d->top = d->top->above;			
+	} else if (pos < 0 || pos >= d->size) {
+		// insert card at the bottom of deck
+		c->above = d->bottom;
+		d->bottom->bellow = c;
+		d->bottom = c;
+	} else {
+		// insert card in the middle
+		
+		// declare variables
+		int i = 0;
+		Card cur = d->top;
+		
+		// move cur into correct position
+		while (i < pos && cur != NULL) {
+			cur = cur->bellow;
+			i++;
+		}
+		
+		// insert card
+		c->above = cur->above;
+		c->bellow = cur;
+		cur->above->bellow = c;
+		cur->above = c;
 	}
-	//cur = c;
+
 	d->size++;
 
 	return d;
@@ -208,6 +222,7 @@ void showDeck(Deck d) {
 // free all memory used for the deck
 void freeDeck(Deck d) {
 	Card c = d->top;
+
 	while (c != NULL) {
 		Card temp = c;
 		c = c->bellow;
@@ -296,7 +311,7 @@ DoubleDeck cutDeck(Deck d, int size) {
 	Card c;													// assumption 2
 	for (int i = 0; i < size; i++) {
 		c = removeBottomCard(d);
-		dd->left = addCard(c, dd->left);
+		dd->left = addCard(c, dd->left, 0);
 	}
 
 	return dd;
@@ -372,7 +387,27 @@ Deck riffle(Deck d, int kind) {
 	return return_deck;
 }
 
+bool equivalentDecks(Deck d1, Deck d2) {
+	
+	// check if same size
+	if (d1->size != d2->size) return false;
 
+	// declare variables
+	Card cur1 = d1->top;
+	Card cur2 = d2->top;
+
+	// loop through checking each card
+	while (cur1 != NULL && cur2 != NULL) {
+		if (cur1->value != cur2->value || cur1->suit != cur2->suit) {
+			return false;
+		}
+
+		cur1 = cur1->bellow;
+		cur2 = cur2->bellow;
+	}
+
+	return true;
+}
 
 
 
