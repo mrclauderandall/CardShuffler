@@ -140,6 +140,37 @@ Deck addCard(Card c, Deck d, int pos) {
 	return d;
 }
 
+
+/*
+	remove a card from the deck in position pos
+	e.g:
+	0  -> remove top card
+	1  -> remove the card under the top card
+	4  -> remove the 4th card (0 indexed)
+	-1 -> remove bottom card
+	if pos > size of deck, also remove
+	bottom card
+*/
+Card removeCard(Deck d, int pos) {
+	if (d->size == 0) {
+		printf("cannot remove a card from an empty deck:\n");
+		showDeck(d);
+		exit(1);
+	}
+
+	// declare variables
+	Card c;
+
+	// check if there is only 1 card
+	if (d->size == 1) {
+		
+	}
+
+}
+
+
+
+
 // remove and return the top card from the deck
 Card removeTopCard(Deck d) {
 	
