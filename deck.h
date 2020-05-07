@@ -63,7 +63,7 @@ void freeDeck(Deck d);
 bool equivalentDecks(Deck d1, Deck d2);
 
 // riffle shuffle the deck
-Deck riffle(Deck d, int kind);
+//Deck riffle(Deck d, int kind);
 
 
 

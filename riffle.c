@@ -1,8 +1,8 @@
 // riffle algorithm implementation
 // written by FyRel
 
-#include "riffle.h"
 #include "deck.h"
+#include "riffle.h"
 
 Deck riffle(Deck d, int kind) {
 
@@ -21,7 +21,7 @@ Deck riffle(Deck d, int kind) {
 	}
 
 	// declare variables
-	int size; 
+	int size;
 	int count = 0;
 	DoubleDeck dd;
 	Deck return_deck;
@@ -47,7 +47,7 @@ Deck riffle(Deck d, int kind) {
 			if ((count % 2) == 0) {
 				insert_card = removeBottomCard(dd->left);
 				insert_card->bellow = c;
-				
+
 				if (c == dd->right->top) {
 					c->above = insert_card;
 					dd->right->top = insert_card;
@@ -56,9 +56,9 @@ Deck riffle(Deck d, int kind) {
 					c->above = insert_card;
 					insert_card->above->bellow = insert_card;
 				}
-			} 
+			}
 
-			c = c->above;			
+			c = c->above;
 			count++;
 		}
 	}
@@ -70,20 +70,20 @@ Deck riffle(Deck d, int kind) {
 	freeDeck(dd->left);
 	free(dd);
 
-	// return the right deck 
+	// return the right deck
 	return return_deck;
 }
 
 
 int left_deck(int a) {
-	
+
 	// generate random number [0:99]
 	srand(time(NULL) + a);
 	int r = rand() % 100;
-	
+
 	// determine size of left deck
 	int n = 26;
-	
+
 	if (r < 2) {
 		n = 21;
 	} else if (r < 4) {
@@ -104,7 +104,7 @@ int left_deck(int a) {
 		n = 25;
 	} else if (r < 70) {
 		n = 27;
-	}	
+	}
 
 	return n;
 }
@@ -122,7 +122,7 @@ DoubleDeck cutDeck(Deck d, int size) {
 	// get random number
 	int left_deck_size = left_deck(0);
 
-	// loop through removing cards and adding them 
+	// loop through removing cards and adding them
 	// to the left double deck
 	Card c;													// assumption 2
 	for (int i = 0; i < size; i++) {

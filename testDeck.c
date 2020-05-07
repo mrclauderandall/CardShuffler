@@ -2,6 +2,7 @@
 // written by FyRel
 
 #include "deck.h"
+#include "riffle.h"
 #include <stdio.h>
 
 int main(void) {
@@ -11,9 +12,12 @@ int main(void) {
 
 	// show the deck
 	showDeck(d);
-
+    //one riffle
+    riffle(d, 0);
+    //show the deck riffled
+    showDeck(d);
 	// free deck
 	freeDeck(d);
 
-	return 0;	
+	return 0;
 }

@@ -44,7 +44,7 @@ Deck newEmptyDeck(void) {
 
 // create a new ordered deck
 Deck newStandardDeck(void) {
-	
+
 	// initalize new empty deck
 	Deck d = newEmptyDeck();
 
@@ -52,11 +52,11 @@ Deck newStandardDeck(void) {
 	Card c;
 	int v;
 	char s;
-	
+
 	// make each card in the standard deck
 	// and add it to the deck
-	for (int i = 0; i < 4; i++) {		
-		// set the suit 
+	for (int i = 0; i < 4; i++) {
+		// set the suit
 		switch (i) {
 			case 0:
 				s = 's'; break;
@@ -70,10 +70,10 @@ Deck newStandardDeck(void) {
 
 		// create a card for each value of the suit
 		for (int v = 14; v >= 2; v--) {
-			
+
 			// create the card
 			c = newCard(s, v);
-			
+
 			// add the card to the deck
 			d = addCard(c, d, 0);
 		}
@@ -98,7 +98,7 @@ Deck addCard(Card c, Deck d, int pos) {
 		// insert card at top of deck
 		d->top->above = c;
 		d->top->above->bellow = d->top;
-		d->top = d->top->above;			
+		d->top = d->top->above;
 	} else if (pos < 0 || pos >= d->size) {
 		// insert card at the bottom of deck
 		c->above = d->bottom;
@@ -106,17 +106,17 @@ Deck addCard(Card c, Deck d, int pos) {
 		d->bottom = c;
 	} else {
 		// insert card in the middle
-		
+
 		// declare variables
 		int i = 0;
 		Card cur = d->top;
-		
+
 		// move cur into correct position
 		while (i < pos && cur != NULL) {
 			cur = cur->bellow;
 			i++;
 		}
-		
+
 		// insert card
 		c->above = cur->above;
 		c->bellow = cur;
@@ -163,7 +163,7 @@ Card removeCard(Deck d, int pos) {
 
 // remove and return the top card from the deck
 Card removeTopCard(Deck d) {
-	
+
 	if (d->size == 0) return newCard('x', 0);
 
 	// set card c as the top card
@@ -186,7 +186,7 @@ Card removeTopCard(Deck d) {
 	d->size--;
 
 	// return the top card
-	return c;	
+	return c;
 }
 
 Card removeBottomCard(Deck d) {
@@ -212,12 +212,12 @@ Card removeBottomCard(Deck d) {
 	d->size--;
 
 	// return the top card
-	return c;	
+	return c;
 }
 
 // print out entire deck to stdin
 void showDeck(Deck d) {
-	
+
 	Card c = d->top;
 
 	if (c == NULL) {
@@ -227,7 +227,7 @@ void showDeck(Deck d) {
 
 	printf("TOP->");
 	while (c != NULL) {
-		
+
 		printCard(c);
 		printf(" ");
 
@@ -237,7 +237,7 @@ void showDeck(Deck d) {
 			c = c->bellow;
 		}
 	}
-	printf("<-BOTTOM\n");	
+	printf("<-BOTTOM\n");
 }
 
 // free all memory used for the deck
@@ -272,8 +272,8 @@ void printCard(Card c) {
 
 
 /*
-	cut the deck "around about" 
-	half way, and then return 
+	cut the deck "around about"
+	half way, and then return
 	two seperate decks in DDeck
 
 	allocate memory for the new
@@ -286,7 +286,7 @@ void printCard(Card c) {
 
 
 bool equivalentDecks(Deck d1, Deck d2) {
-	
+
 	// check if same size
 	if (d1->size != d2->size) return false;
 
