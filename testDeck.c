@@ -8,13 +8,17 @@
 
 // test function definitions
 void test_addCard(void);
+void test_removeCard(void);
 
 int main(void) {
 
 	// create a new deck
 	Deck d = newStandardDeck();
 
-	// test addCard
+	// show deck
+	//showDeck(d);
+
+	test_removeCard();
 
 
 	// free deck
@@ -76,6 +80,33 @@ void test_addCard(void) {
 	printf("t_addCard: test 3 passed\n");
 }
 
+void test_removeCard(void) {
+/*
+	// CASE 1: attempt to remove a card from an empty deck
+	Deck d = newEmptyDeck();
+	//Card c = removeCard(d, 0);
+
+	// CASE 2: remove the last card from the deck
+	addCard(newCard('t', 0), d, 0);
+	assert(deckSize(d) == 1);
+	Card c = removeCard(d, 0);
+	assert(deckSize(d) == 0);
+	printCard(c);
+*/
+	// CASE 3: remove all the cards from a standard deck from the bottom
+	Deck fulldeck = newStandardDeck();
+	int deck_size = deckSize(fulldeck);
+	printf("deck_size = %d\n", deck_size);
+
+	showDeck(fulldeck);
+
+	for (int i = 0; i < deck_size; i++) {
+		Card c = removeCard(fulldeck, -1);
+		printCard(c);
+		showDeck(fulldeck);
+	}
+	printf("\n");
+}
 
 
 
