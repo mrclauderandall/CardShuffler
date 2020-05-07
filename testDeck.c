@@ -11,15 +11,21 @@ int main(void) {
 	Deck d = newStandardDeck();
 
 	// show the deck
+	printf("original deck: ");
 	showDeck(d);
+	printf("\n\n");
     
 	// riffle deck 7 times and show deck after each riffle
 	for (int i = 0; i < 4; i++) {
+		printf("now starting riffle shuffle number %d\n", i);
+
 		// riffle deck
     	riffle(d, 0);
     	
     	//show the deck riffled
+    	printf("after riffle number %d:\n", i);
     	showDeck(d);
+    	printf("\n");
 	}
  
 	// free deck

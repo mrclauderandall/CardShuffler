@@ -18,6 +18,7 @@ Deck riffle(Deck d, int kind) {
 		exit(1);
 	} else if (d->size < 2) {
 		printf("cannot shuffle a deck with less than 2 cards\n");
+		exit(1);
 	}
 
 	// declare variables
@@ -40,8 +41,10 @@ Deck riffle(Deck d, int kind) {
 	// cut the deck
 	dd = cutDeck(d, size);
 
-	printf("dd->left->size = %d\n", dd->left->size);
-	printf("dd->right->size = %d\n", dd->right->size);
+	printf("dd->left:  ");
+	showDeck(dd->left);
+	printf("dd->right: ");
+	showDeck(dd->right);
 
 	// riffle shuffle deck
 	if (kind == 0) {
