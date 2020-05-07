@@ -148,13 +148,14 @@ Card removeCard(Deck d, int pos) {
 	}
 
 	// declare variables
-	Card c;
+	Card c =  NULL;
 
 	// check if there is only 1 card
 	if (d->size == 1) {
-		
+
 	}
 
+	return c;
 }
 
 
