@@ -4,13 +4,29 @@
 #include "deck.h"
 #include "riffle.h"
 
-Deck riffle(Deck d, int kind) {
+void rifflePerfect(Deck d) {
+	// check valid deck
+	if (d == NULL) {
+		printf("this deck is empty\n");
+		exit(1);
+	} else if (d->size < 2) {
+		printf("cannot shuffle a deck with less than 2 cards\n");
+		exit(1);
+	}
+
+	// declare variables
+	int size = d->size / 2;
+
+	// cut the deck		
+}
+
+void riffle(Deck d, int kind) {
 
 	/*
 	kind:
 		0 	perfect shuffle
 		1	human like shuffle
-	*/
+	
 
 	// check valid deck
 	if (d == NULL) {
@@ -71,15 +87,13 @@ Deck riffle(Deck d, int kind) {
 		}
 	}
 
-	// assign the return deck to the right deck
-	return_deck = dd->right;
+	// assign d to the right deck
+	d = dd->right;
 
 	// free double deck structure
 	freeDeck(dd->left);
 	free(dd);
-
-	// return the right deck
-	return return_deck;
+*/
 }
 
 
@@ -119,26 +133,24 @@ int left_deck(int a) {
 
 
 
-DoubleDeck cutDeck(Deck d, int size) {
+Deck cutDeck(Deck d, int size) {
 	// allocate memory for new DDeck
-	DoubleDeck dd = malloc(sizeof(*dd));
+	Deck left = malloc(sizeof(*left));
 
 	// initalized the double deck
-	dd->left = newEmptyDeck();
-	dd->right = d;											// assumption 3
-
-	// get random number
-	int left_deck_size = left_deck(0);
+	left = newEmptyDeck();
 
 	// loop through removing cards and adding them
-	// to the left double deck
-	Card c;													// assumption 2
+	// to the left deck
 	for (int i = 0; i < size; i++) {
-		c = removeCard(d, -1);
-		addCard(c, dd->left, 0);
+		Card c = removeCard(d, -1);
+		printf("removed card ");
+		printCard(c);
+		printf("\n");
+		//addCard(c, left, 0);
 	}
 
-	return dd;
+	return left;
 }
 
 

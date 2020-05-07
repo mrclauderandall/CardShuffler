@@ -305,6 +305,25 @@ int cardPosition(Deck d, Card c) {
 	return -1;
 }
 
+int deckSize(Deck d) {
+	return d->size;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
