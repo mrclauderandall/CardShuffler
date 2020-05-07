@@ -57,36 +57,6 @@ DoubleDeck cutDeck(Deck d, int size);
 
 
 
-/*
-ASSUMPTIONS
-
-	1) the top card of a deck is the card on the top of the deck when 
-	a deck of cards is faced down. This is the card that is dealt first
-	in most standard card games such as poker, gofish
-
-	2) when cutting a deck, most people hold the deck in such a way 
-	that means they 'count' from bottom to an estimated half way
-
-	3) when cutting a deck, the deck on the right is actually the original
-	deck, while the deck on the left is originally empty, and one by one has
-	cards from the right (original) deck added to it
-
-	4) it is ok for the top and bottom card to be the same card in a deck 
-	with only 1 card in it
-
-
-NOTES
-
-	1) card 0x is a 'nothing card' that should not appear
-
-
-
-
-
-*/
-
-
-
 
 
 
