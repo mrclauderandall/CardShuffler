@@ -16,7 +16,7 @@ int main(void) {
 	printf("\n\n");
     
 	// riffle deck 7 times and show deck after each riffle
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 53; i++) {
 		printf("now starting riffle shuffle number %d\n", i);
 
 		// riffle deck
@@ -27,9 +27,19 @@ int main(void) {
     	showDeck(d);
     	printf("\n");
 	}
- 
+ 	
+
+
 	// free deck
 	freeDeck(d);
 
 	return 0;
 }
+
+
+
+
+
+
+
+

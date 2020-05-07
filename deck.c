@@ -5,9 +5,6 @@
 
 // * * * helper functions * * *
 
-
-
-
 Card newCard(char suit, int value) {
 	Card c = malloc(sizeof(*c));
 
@@ -142,20 +139,43 @@ Deck addCard(Card c, Deck d, int pos) {
 */
 Card removeCard(Deck d, int pos) {
 	if (d->size == 0) {
-		printf("cannot remove a card from an empty deck:\n");
+		printf("cannot remove a card from an empty deck:\ndeck given:\n");
 		showDeck(d);
 		exit(1);
 	}
 
 	// declare variables
-	Card c =  NULL;
+	Card cur =  d->top;
+	int i = 0;
 
-	// check if there is only 1 card
+	// check if there is only 1 card and
+	// check if removing top or bottom card
+	// and if not remove the positional card
 	if (d->size == 1) {
+		// remove the last card in the deck
+		d->top = NULL;
+		d->bottom = NULL;
+	} else if (pos == 0) {
+		// unlink top card from card bellow
+		d->top = d->top->bellow;
+		d->top->above = NULL;
+		cur->bellow = NULL;
+	} else if (pos < 0 || pos >= d->size) {
+		// unlink bottom card from card above
+		d->bottom = d->bottom->above;
+		d->bottom->bellow = NULL;
+		c->above = NULL;
 
+	} else {
+		// loop through to correct card
+		while (i < pos && cur != NULL) {
+			cur = cur->bellow;
+			i++;
+		}
 	}
 
-	return c;
+	d->size--;
+	return cur;
 }
 
 
