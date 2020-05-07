@@ -23,7 +23,7 @@ int main(void) {
     	riffle(d, 0);
     	
     	//show the deck riffled
-    	printf("after riffle number %d:\n", i);
+    	printf("after riffle number %d:		d->size = %d\n", i, d->size);
     	showDeck(d);
     	printf("\n");
 	}

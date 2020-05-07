@@ -62,6 +62,8 @@ Deck riffle(Deck d, int kind) {
 					c->above = insert_card;
 					insert_card->above->bellow = insert_card;
 				}
+
+				dd->right->size++;
 			}
 
 			c = c->above;
