@@ -71,6 +71,9 @@ void printCard(Card c);
 // free all memory used for the deck
 void freeDeck(Deck d);
 
+// free all memory used for a card
+void freeCard(Card c);
+
 // check to see if two decks are the same
 bool equivalentDecks(Deck d1, Deck d2);
 

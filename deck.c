@@ -21,6 +21,10 @@ Card newCard(char suit, int value) {
 	return c;
 }
 
+void freeCard(Card c) {
+	
+}
+
 // create a new empty deck
 Deck newEmptyDeck(void) {
 	// allocate memory for the new deck

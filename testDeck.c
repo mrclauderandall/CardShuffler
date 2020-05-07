@@ -6,13 +6,16 @@
 #include <stdio.h>
 #include <assert.h>
 
+// test function definitions
+void test_addCard(void);
+
 int main(void) {
 
 	// create a new deck
 	Deck d = newStandardDeck();
 
-
- 	
+	// test addCard
+	test_addCard();
 
 
 	// free deck
@@ -34,7 +37,7 @@ void test_addCard(void) {
 	assert(addCard(invalid_c, valid_d, 0) == valid_d);
 	free(valid_d);
 	free(valid_c);
-	printf("t_addCard: test 1 passed\n");
+	printf("t_addCard: test 0 passed\n");
 
 	// CASE 1: empty deck
 	// create two empty decks and a valid card
@@ -56,13 +59,16 @@ void test_addCard(void) {
 	assert(d2->top->value == 0);
 	assert(d2->bottom->value == 0);
 
-	// CASE 2: add to bottom of single card deck
+	// free decks and card
+	freeDeck(d1);
+	freeDeck(d2);
+	free(c);
 
-	// CASE 3: add to top of single card deck
+	// CASE 2: add to middle of 2 card deck
+	// create a deck and 3 cards
 
-	// CASE 4: add to middle of 2 card deck
 
-	// CASE 5: add a card to a middle position of a standard deck
+	// CASE 3: add a card to a middle position of a standard deck
 }
 
 
