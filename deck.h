@@ -23,11 +23,6 @@ struct deck {
 	int size;
 };
 
-typedef struct ddeck *DoubleDeck;
-struct ddeck {
-	Deck left, right;
-};
-
 // create a new card with the given suit and value
 Card newCard(char suit, int value);
 
@@ -70,9 +65,7 @@ bool equivalentDecks(Deck d1, Deck d2);
 // riffle shuffle the deck
 Deck riffle(Deck d, int kind);
 
-// cut the deck 
-// size is the size of the left deck
-DoubleDeck cutDeck(Deck d, int size);
+
 
 
 
