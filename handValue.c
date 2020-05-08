@@ -12,10 +12,10 @@
 #define QUEEN 12
 #define JACK  11
 
-#define SPADES   1
-#define DIAMONDS 2
-#define CLUBS    3
-#define HEARTS   4
+#define SPADES   0
+#define DIAMONDS 1
+#define CLUBS    2
+#define HEARTS   3
 
 /*
 struct {
@@ -39,11 +39,11 @@ int r = value % 13;
 int s = value / 13;
 */
 
-u_int64_t cardPairs = 0x0000000000000000;
 
 
-void printbits(u_int64_t number);
-
+int leastSignificantBit(uint64_t number);
+void printbits(uint64_t number);
+int isStraightFlush(uint64_t h);
 /*
 2^((4*i)+j) where i = 0...12 (value of 2 to A) and j == 0..3 (suits)
 */
@@ -62,8 +62,25 @@ int main(int argc, char* argv[]) {
     addCard(c4, d1, 3);
     addCard(c5, d1, 4);
     showDeck(d1);
-    u_int64_t x = pow(2,51);
-    printbits(x);
+    uint64_t cardPairs = 0x0000000000000000;
+    uint64_t AH = pow(2,50);
+    uint64_t KH = pow(2,46);
+    uint64_t QH = pow(2,42);
+    uint64_t JH = pow(2,38);
+    uint64_t TH = pow(2,34);
+    cardPairs = cardPairs | AH | KH | QH | JH | TH;
+    uint64_t logster = cardPairs & -cardPairs;
+    printf("%llu\n", logster);
+    int count = 0;
+    while (logster > 1) {
+        logster = logster/2;
+        count++;
+    }
+    printf("%d\n", count);
+    count = count -3;
+    int hh = (cardPairs>>(count)) & (cardPairs>>(count+4)) & (cardPairs>>(count+8)) & (cardPairs>>(count+12)) & (cardPairs>>(count+16));
+    printf("%d\n", hh);
+    printbits(cardPairs);
     /*
     int i = 1;
     while(i < argc) {
@@ -136,7 +153,25 @@ int isFlush(Deck d1) {
     if (diamonds >= 5)
 }
 */
-void printbits(u_int64_t number){
+
+int isStraightFlush(u_int64_t h) {
+    return 0;
+}
+
+
+
+int leastSignificantBit(uint64_t number) {
+    int index = 0;
+
+    while ((~number) & 1) {
+        number >>= 1;
+        index++;
+    }
+    return 1 << index;
+}
+
+
+void printbits(uint64_t number){
     //loop counter
     int i = 0;
         /*
@@ -149,7 +184,7 @@ void printbits(u_int64_t number){
             This starts with a 1 at the 31st (leftmost) position,
             followed by 31 zeros.
         */
-    u_int64_t mask = 0x8000000000000000;
+    uint64_t mask = 0x8000000000000000;
 
     //loop through the 32 bits
     for(i=63;i>=0;i--) {
