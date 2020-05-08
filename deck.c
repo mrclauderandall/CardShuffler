@@ -57,32 +57,47 @@ Deck newStandardDeck(void) {
 
 	// declare variables for card creating
 	Card c;
-	int v;
-	char s;
+	int s, i;
+	int v = 12;
 
 	// make each card in the standard deck
 	// and add it to the deck
-	for (int i = 0; i < 4; i++) {
-		// set the suit
-		switch (i) {
-			case 0:
-				s = 's'; break;
-			case 1:
-				s = 'h'; break;
-			case 2:
-				s = 'c'; break;
-			default:
-				s = 'd';
-		}
-
+	for (int s = 3; s > 1; s--) {
 		// create a card for each value of the suit
-		for (int v = 14; v >= 2; v--) {
-
+		for (int i = 0; i < 13; i++) {
+			// modulo v
+			v = v % 13;
+			
 			// create the card
 			c = newCard(s, v);
 
 			// add the card to the deck
 			addCard(c, d, 0);
+
+			// incrament value
+			v++;
+		}
+	}
+
+	v = 11;
+	for (s = 1; s >= 0; s--) {
+		// create a card for each value of the suit
+		for (int i = 0; i < 13; i++) {
+			// modulo v
+			v = v % 13;
+			
+			// create the card
+			c = newCard(s, v);
+
+			// add the card to the deck
+			addCard(c, d, 0);
+
+			// incrament value
+			v--;
+
+			if (v < 0) {
+				v = 12;
+			}
 		}
 	}
 
@@ -200,24 +215,20 @@ Card removeCard(Deck d, int pos) {
 // print out entire deck to stdin
 void showDeck(Deck d) {
 
-	Card c = d->top;
+	Card cur = d->top;
 
-	if (c == NULL) {
+	if (cur == NULL) {
 		printf("this deck is empty\n");
 		return;
 	}
 
-	printf("TOP->");
-	while (c != NULL) {
+	printf("TOP-> ");
+	while (cur != NULL) {
 
-		printCard(c);
+		printCard(cur);
 		printf(" ");
 
-		if (c == d->bottom) {
-			break;
-		} else {
-			c = c->bellow;
-		}
+		cur = cur->bellow;
 	}
 	printf("<-BOTTOM\n");
 }
@@ -235,19 +246,50 @@ void freeDeck(Deck d) {
 }
 
 void printCard(Card c) {
-	if (c == NULL) return;
-
-	switch (c->value) {
+	if (c == NULL) printf("NULL\n");
+	
+	switch (valueCard(c)) {
+		case 0:
+			printf("2"); break;
+		case 1:
+			printf("3"); break;
+		case 2:
+			printf("4"); break;
+		case 3:
+			printf("5"); break;
+		case 4:
+			printf("6"); break;
+		case 5:
+			printf("7"); break;
+		case 6:
+			printf("8"); break;
+		case 7:
+			printf("9"); break;
+		case 8:
+			printf("10"); break;
+		case 9:
+			printf("J"); break;
+		case 10:
+			printf("Q"); break;
 		case 11:
-			printf("J%c", c->suit); break;
+			printf("K"); break;
 		case 12:
-			printf("Q%c", c->suit); break;
-		case 13:
-			printf("K%c", c->suit); break;
-		case 14:
-			printf("A%c", c->suit); break;
+			printf("A"); break;
 		default:
-			printf("%d%c", c->value, c->suit);
+			printf("!value error!");
+	}
+
+	switch (suitCard(c)) {
+		case 0:
+			printf("h"); break;
+		case 1:
+			printf("c"); break;
+		case 2:
+			printf("d"); break;
+		case 3:
+			printf("s"); break;
+		default:
+			printf("!suit error!\n");
 	}
 }
 
@@ -332,7 +374,7 @@ int valueCard(Card c) {
 }
 
 // return the suit of card c
-char suitCard(Card c) {
+int suitCard(Card c) {
 	if (c == NULL) {
 		printf("invalid card given to function suitCard\n");
 		exit(1);

@@ -28,11 +28,8 @@ int main(void) {
 	}
 
 	// show deck
-	printf("shuffled deck:\n");
+	printf("\nsame deck after 1000 riffle shuffles:\n");
 	showDeck(d);
-	printf("coppied deck:\n");
-	showDeck(d_copy);
-	//printf("size = %d\n", deckSize(d));
 
 	// free deck
 	freeDeck(d);

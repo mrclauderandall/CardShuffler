@@ -12,8 +12,7 @@
 
 typedef struct card *Card;
 struct card {
-	char suit;
-	int value;
+	int value, suit;
 	Card above, bellow;
 };
 
@@ -40,7 +39,7 @@ Card copyCard(Card c);
 int valueCard(Card c);
 
 // return the suit of card c
-char suitCard(Card c);
+int suitCard(Card c);
 
 // create a new empty deck
 Deck newEmptyDeck(void);
@@ -49,6 +48,28 @@ Deck newEmptyDeck(void);
 int deckSize(Deck d);
 
 // create a new standard ordered deck
+/*
+	suits:
+		0	hearts
+		1	clubs
+		2	diomonds
+		3	spades
+
+	values:
+		2	0
+		3	1
+		4	2
+		5	3
+		6	4
+		7	5
+		8	6
+		9	7
+		10	8
+		J	9
+		Q	10
+		K	11
+		A   12
+*/
 Deck newStandardDeck(void);
 
 /*
