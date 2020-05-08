@@ -30,6 +30,18 @@ struct deck {
 */
 Card newCard(char suit, int value);
 
+/*
+	return a new card with the same 
+	suit and value as card c
+*/
+Card copyCard(Card c);
+
+// return the value of card c
+int valueCard(Card c);
+
+// return the suit of card c
+char suitCard(Card c);
+
 // create a new empty deck
 Deck newEmptyDeck(void);
 

@@ -315,9 +315,31 @@ int deckSize(Deck d) {
 	return d->size;
 }
 
+Card copyCard(Card c) {
+	if (c == NULL) return NULL;
+	
+	return newCard(suitCard(c), valueCard(c));
+}
 
+// return the value of card c
+int valueCard(Card c) {
+	if (c == NULL) {
+		printf("invalid card given to function valueCard\n");
+		exit(1);
+	}
 
+	return c->value;
+}
 
+// return the suit of card c
+char suitCard(Card c) {
+	if (c == NULL) {
+		printf("invalid card given to function suitCard\n");
+		exit(1);
+	}
+
+	return c->suit;
+}
 
 
 

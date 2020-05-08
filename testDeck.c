@@ -20,14 +20,6 @@ int main(void) {
 
 	// riffle shuffle deck
 	riffleHuman(d);
-	riffleHuman(d);
-	riffleHuman(d);
-	riffleHuman(d);
-	riffleHuman(d);
-	riffleHuman(d);
-	riffleHuman(d);
-	riffleHuman(d);
-	riffleHuman(d);
 
 	// show deck
 	showDeck(d);
