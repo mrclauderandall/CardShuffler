@@ -18,12 +18,16 @@ int main(void) {
 	// show deck
 	showDeck(d);
 
+	// copy deck to new deck
+	Deck d_copy = copyDeck(d);
+
 	// riffle shuffle deck
-	riffleHuman(d);
+	//riffleHuman(d);
 
 	// show deck
 	showDeck(d);
-	printf("size = %d\n", deckSize(d));
+	showDeck(d_copy);
+	//printf("size = %d\n", deckSize(d));
 
 	// free deck
 	freeDeck(d);

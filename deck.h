@@ -75,6 +75,12 @@ void addCard(Card c, Deck d, int pos);
 */
 Card removeCard(Deck d, int pos);
 
+/*
+	create a new deck and copy all of
+	cards from d into the new deck
+*/
+Deck copyDeck(Deck d);
+
 // print out entire deck to stdin
 void showDeck(Deck d);
 
