@@ -345,10 +345,10 @@ Deck copyDeck(Deck d) {
 	Deck new_deck = newEmptyDeck();
 	Card cur = d->top;
 	while (cur != NULL) {
-		addCard(newCard(suitCard(cur), valueCard(cur)), new_deck, -1);
+		addCard(copyCard(cur), new_deck, -1);
 		cur = cur->bellow;
 	}
-	return d;
+	return new_deck;
 }
 
 

@@ -16,16 +16,21 @@ int main(void) {
 	Deck d = newStandardDeck();
 
 	// show deck
+	printf("original deck:\n");
 	showDeck(d);
 
 	// copy deck to new deck
 	Deck d_copy = copyDeck(d);
 
 	// riffle shuffle deck
-	//riffleHuman(d);
+	for (int i = 0; i < 1000; i++) {
+		riffleHuman(d);
+	}
 
 	// show deck
+	printf("shuffled deck:\n");
 	showDeck(d);
+	printf("coppied deck:\n");
 	showDeck(d_copy);
 	//printf("size = %d\n", deckSize(d));
 
