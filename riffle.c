@@ -6,7 +6,7 @@
 #include "deck.h"
 #include "riffle.h"
 
-bool rChance(int a);
+bool rChance(int a, int left_size, int right_size, int last_card);
 
 void rifflePerfect(Deck d) {
 	// check valid deck
@@ -65,17 +65,21 @@ void riffleHuman(Deck d) {
 	// declare variables
 	int size = leftDeckSize(0);
 	int a = 0;
+	int last_card = 0;
 	Card insert_card;
 
 	// cut the deck
 	Deck l = cutDeck(d, size);
+
+	// get original size of right deck
+	int right_size = deckSize(d);
 
 	// initalize cur
 	Card cur = d->bottom;
 
 	// loop through
 	while (cur != NULL && deckSize(l) > 0) {
-		if (rChance(a)) {
+		if (rChance(a, deckSize(l), right_size, last_card)) {
 			insert_card = removeCard(l, -1);
 			insert_card->bellow = cur;
 
@@ -88,8 +92,13 @@ void riffleHuman(Deck d) {
 				insert_card->above->bellow = insert_card;
 			}
 
+			last_card = -35;
 			d->size++;
-		} 
+		} else {
+			right_size--;
+			last_card = 35;
+		}
+
 
 		a++;
 		cur = cur->above;
@@ -164,12 +173,24 @@ Deck cutDeck(Deck d, int size) {
 	return left;
 }
 
-bool rChance(int a) {
+bool rChance(int a, int left_size, int right_size, int last_card) {
+	// calculate split
+	double l = (double)left_size;
+	double r = (double)right_size;
+
+	//printf("left_size = %f, right_size = %f, last_card = %d\n", l, r, last_card);
+
+
+
+	double split = (l / r) * 50;
+	split += last_card;
+	//printf("split = %f\n", split);
+
 	// generate random number [0:99]
 	srand(time(NULL) + a);
-	int r = rand() % 100;
+	int ran = rand() % 100;
 
-	if (r < 51) return true;
+	if (ran < split) return true;
 
 	return false;
 }

@@ -16,19 +16,16 @@ int main(void) {
 	Deck d = newStandardDeck();
 
 	// show deck
-	printf("original deck:\n");
-	showDeck(d);
-
-	// copy deck to new deck
-	Deck d_copy = copyDeck(d);
+	//printf("original deck:\n");
+	//showDeck(d);
 
 	// riffle shuffle deck
-	for (int i = 0; i < 1000; i++) {
+	for (int i = 0; i < 8; i++) {
 		riffleHuman(d);
 	}
 
 	// show deck
-	printf("\nsame deck after 1000 riffle shuffles:\n");
+	//printf("\nsame deck after 1000 riffle shuffles:\n");
 	showDeck(d);
 
 	// free deck
