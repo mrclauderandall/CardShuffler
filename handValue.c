@@ -50,11 +50,11 @@ int isStraightFlush(uint64_t h);
 
 int main(int argc, char* argv[]) {
 
-    Card c1 = newCard('d',14);
-    Card c2 = newCard('c',2);
-    Card c3 = newCard('c',14);
-    Card c4 = newCard('h',7);
-    Card c5 = newCard('d',11);
+    Card c1 = newCard(0,12);
+    Card c2 = newCard(1,2);
+    Card c3 = newCard(2,12);
+    Card c4 = newCard(3,7);
+    Card c5 = newCard(0,11);
     Deck d1 = newEmptyDeck();
     addCard(c1, d1, 0);
     addCard(c2, d1, 1);
@@ -63,12 +63,14 @@ int main(int argc, char* argv[]) {
     addCard(c5, d1, 4);
     showDeck(d1);
     uint64_t cardPairs = 0x0000000000000000;
-    uint64_t AH = pow(2,50);
+    uint64_t AH = pow(2,49);
     uint64_t KH = pow(2,46);
-    uint64_t QH = pow(2,42);
-    uint64_t JH = pow(2,38);
-    uint64_t TH = pow(2,34);
-    cardPairs = cardPairs | AH | KH | QH | JH | TH;
+    uint64_t QH = pow(2,17);
+    uint64_t JH = pow(2,13);
+    uint64_t TH = pow(2,9);
+    uint64_t TS = pow(2,5);
+    uint64_t NS = pow(2,1);
+    cardPairs = cardPairs | NS | TS | AH | KH | QH | JH | TH;
     uint64_t logster = cardPairs & -cardPairs;
     printf("%llu\n", logster);
     int count = 0;
@@ -78,8 +80,10 @@ int main(int argc, char* argv[]) {
     }
     printf("%d\n", count);
     count = count -3;
-    int hh = (cardPairs>>(count)) & (cardPairs>>(count+4)) & (cardPairs>>(count+8)) & (cardPairs>>(count+12)) & (cardPairs>>(count+16));
-    printf("%d\n", hh);
+    //uint64_t hh = (cardPairs>>(count)) & (cardPairs>>(count+4)) & (cardPairs>>(count+8)) & (cardPairs>>(count+12)) & (cardPairs>>(count+16));
+    //uint64_t hh = (cardPairs) & (cardPairs>>(4)) & (cardPairs>>(8)) & (cardPairs>>(12)) & (cardPairs>>(16));
+    //printf("%llu\n", hh);
+    isStraightFlush(cardPairs);
     printbits(cardPairs);
     /*
     int i = 1;
@@ -155,6 +159,24 @@ int isFlush(Deck d1) {
 */
 
 int isStraightFlush(u_int64_t h) {
+    uint64_t AtoFiveS = 0x0001000000001111;
+    uint64_t AtoFiveD = 0x0002000000002222;
+    uint64_t AtoFiveC = 0x0004000000004444;
+    uint64_t AtoFiveH = 0x0008000000008888;
+    int AtoFiveFlag = 0;
+    if (((h & AtoFiveS) == AtoFiveS) || ((h & AtoFiveD) == AtoFiveD) || ((h & AtoFiveC) == AtoFiveC) || ((h & AtoFiveH) == AtoFiveH)){
+        AtoFiveFlag = 1;
+    }
+
+
+    uint64_t hh = (h) & (h>>(4)) & (h>>(8)) & (h>>(12)) & (h>>(16));
+    if (hh > 0) {
+        printf("OTHER STRAIGHT!\n");
+        return 1;
+    } else if (AtoFiveFlag == 1){
+        printf("Straight Flush A to 5!\n");
+        return 1;
+    }
     return 0;
 }
 
