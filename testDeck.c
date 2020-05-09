@@ -16,6 +16,7 @@ int main(void) {
 
 	// create a new deck
 	Deck d = newStandardDeck();
+	Deck D = newStandardDeck();
 
 	// show deck
 	printf("original deck:\n");
@@ -23,15 +24,20 @@ int main(void) {
 
 	// riffle shuffle deck
 	for (int i = 0; i < 1; i++) {
-		shuffle(d);
+		riffleHuman(d);
 	}
 
 	// show deck
 	printf("\nsame deck after 1 shuffle:\n");
 	showDeck(d);
 
+	// print the order retainment of the shuffled deck
+	int order = orderRetainment(D, d);
+	printf("order = %d\n", order);
+	
 	// free deck
 	freeDeck(d);
+	freeDeck(D);
 
 	return 0;
 }

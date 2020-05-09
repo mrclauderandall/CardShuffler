@@ -367,8 +367,7 @@ Card copyCard(Card c) {
 // return the value of card c
 int valueCard(Card c) {
 	if (c == NULL) {
-		printf("invalid card given to function valueCard\n");
-		exit(1);
+		return -1;
 	}
 
 	return c->value;
@@ -377,8 +376,7 @@ int valueCard(Card c) {
 // return the suit of card c
 int suitCard(Card c) {
 	if (c == NULL) {
-		printf("invalid card given to function suitCard\n");
-		exit(1);
+		return -1;
 	}
 
 	return c->suit;
