@@ -3,12 +3,14 @@
 
 #include "deck.h"
 #include "riffle.h"
+#include "random.h"
 #include <stdio.h>
 #include <assert.h>
 
 // test function definitions
 void test_addCard(void);
 void test_removeCard(void);
+void shuffle_test(void);
 
 int main(void) {
 
@@ -16,16 +18,16 @@ int main(void) {
 	Deck d = newStandardDeck();
 
 	// show deck
-	//printf("original deck:\n");
-	//showDeck(d);
+	printf("original deck:\n");
+	showDeck(d);
 
 	// riffle shuffle deck
-	for (int i = 0; i < 8; i++) {
-		riffleHuman(d);
+	for (int i = 0; i < 1; i++) {
+		shuffle(d);
 	}
 
 	// show deck
-	//printf("\nsame deck after 1000 riffle shuffles:\n");
+	printf("\nsame deck after 1 shuffle:\n");
 	showDeck(d);
 
 	// free deck
@@ -35,7 +37,9 @@ int main(void) {
 }
 
 
-
+void shuffle_test(void) {
+	return;
+}
 
 
 
@@ -244,32 +248,34 @@ void test_addCard(void) {
 }
 
 void test_removeCard(void) {
-/*
+
 	// CASE 1: attempt to remove a card from an empty deck
 	Deck d = newEmptyDeck();
 	//Card c = removeCard(d, 0);
+	// CORRECT
 
 	// CASE 2: remove the last card from the deck
-	addCard(newCard('t', 0), d, 0);
+	addCard(newCard(0, 0), d, 0);
 	assert(deckSize(d) == 1);
 	Card c = removeCard(d, 0);
 	assert(deckSize(d) == 0);
-	printCard(c);
+	// CORRECT
 
 	// CASE 3: remove all the cards from a standard deck from the bottom
 	Deck fulldeck = newStandardDeck();
-	int deck_size = deckSize(fulldeck);
-	printf("deck_size = %d\n", deck_size);
-
+	int size = deckSize(fulldeck);
 	showDeck(fulldeck);
 
-	for (int i = 0; i < deck_size; i++) {
-		Card c = removeCard(fulldeck, -1);
-		printCard(c);
+	for (int i = 0; i < size; i++) {
+		c = removeCard(fulldeck, 26);
 		showDeck(fulldeck);
 	}
-	printf("\n");
-*/
+
+	assert(deckSize(fulldeck) == 0);
+	assert(fulldeck->top == NULL);
+	assert(fulldeck->bottom == NULL);
+	// CORRECT
+
 }
 
 

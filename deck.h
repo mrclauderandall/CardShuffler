@@ -117,12 +117,14 @@ void freeCard(Card c);
 // check to see if two decks are the same
 bool equivalentDecks(Deck d1, Deck d2);
 
+// check to see if two cards are the same
+bool equivalentCards(Card c1, Card c2);
+
 /*
 	search for and return the position of a card in a deck
 	return -1 if the card is not in the deck
 */
 int cardPosition(Deck d, Card c);
-
 
 
 

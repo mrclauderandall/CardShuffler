@@ -169,7 +169,7 @@ Card removeCard(Deck d, int pos) {
 	}
 
 	// declare variables
-	Card cur;;
+	Card cur;
 	int i = 0;
 
 	// check if there is only 1 card and
@@ -185,7 +185,7 @@ Card removeCard(Deck d, int pos) {
 		cur = d->top;
 		d->top = d->top->bellow;
 		d->top->above = NULL;
-	} else if (pos < 0 || pos >= d->size) {
+	} else if (pos < 0 || pos >= (deckSize(d) - 1)) {
 		// unlink bottom card from card above
 		cur = d->bottom;
 		d->bottom = d->bottom->above;
@@ -222,6 +222,7 @@ void showDeck(Deck d) {
 		return;
 	}
 
+	printf("size: %d\n", deckSize(d));
 	printf("TOP-> ");
 	while (cur != NULL) {
 
@@ -352,7 +353,7 @@ int cardPosition(Deck d, Card c) {
 }
 
 int deckSize(Deck d) {
-	if (d == NULL) return 0;
+	if (d == NULL) return -1;
 	
 	return d->size;
 }
@@ -393,7 +394,12 @@ Deck copyDeck(Deck d) {
 	return new_deck;
 }
 
+// check to see if two cards are the same
+bool equivalentCards(Card c1, Card c2) {
+	if (suitCard(c1) == suitCard(c2) && valueCard(c1) == valueCard(c2)) return true;
 
+	return false;
+}
 
 
 
