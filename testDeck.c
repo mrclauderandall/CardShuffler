@@ -17,18 +17,19 @@ int main(void) {
 	// create a new deck
 	Deck d = newStandardDeck();
 	Deck D = newStandardDeck();
+	int i;
 
 	// show deck
 	printf("original deck:\n");
 	showDeck(d);
 
 	// riffle shuffle deck
-	for (int i = 0; i < 1; i++) {
+	for (i = 0; i < 10000; i++) {
 		riffleHuman(d);
 	}
 
 	// show deck
-	printf("\nsame deck after 1 shuffle:\n");
+	printf("\nsame deck after %d shuffle:\n", i);
 	showDeck(d);
 
 	// print the order retainment of the shuffled deck

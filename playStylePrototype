@@ -1,0 +1,256 @@
+$ ./pook
+hello, welcome to our poker game!
+
+              __                                               
+        _..-''--'----_.                                        
+      ,''.-''| .---/ _`-._                                     
+    ,' \ \  ;| | ,/ / `-._`-.                                  
+  ,' ,',\ \( | |// /,-._  / /                                  
+  ;.`. `,\ \`| |/ / |   )/ /                                   
+ / /`_`.\_\ \| /_.-.'-''/ /                                    
+/ /_|_:.`. \ |;'`..')  / /                                     
+`-._`-._`.`.;`.\  ,'  / /                                      
+    `-._`.`/    ,'-._/ /                                       
+      : `-/     \`-.._/                                        
+      |  :      ;._ (                                          
+      :  |      \  ` \                                         
+       \         \   |                                         
+        :        :   ;                                         
+        |           /                                          
+        ;         ,'                                           
+       /         /                                             
+      /         /                                              
+               / 
+
+Please enter the number of players: {12}
+Sorry, please enter a number between 2 and 9
+Please enter the number of players: {4}
+Great, 4 player table read! 
+How many AI players do you: {2}
+Great, 2 AI players added to the table.
+
+Pre flop:
+
+
+player 1 (ai)							player 2
+chips: 400       , - ~ ~ ~ - ,			chips: 400
+		     , D              UTG,		UTG
+		   ,                       ,
+		  ,                         ,
+		 ,                           ,
+		 ,     			             ,
+		 ,                           ,
+		  ,                         ,
+		   ,                       ,
+		     ,  20           10 , '
+Player 4 (ai) BB - , _ _ _ ,  SB		player 3 
+chips: 400								chips: 400
+
+			{ASCII art will need to be bigger to git community cards}
+
+
+			!!! PLAYER 2 !!!
+F - fold 					C - call
+S - show cards				R - raise
+player 2's turn: {S}
+
+your hand: Ah 10h
+{terminal stdin auto cleared once player presses return}
+player 2's turn: {R}
+raise: 60
+
+Player 2 raises, 60 chips
+
+			!!! PLAYER 3 !!!
+F - fold 					C - call
+S - show cards				R - raise
+player 3's turn: {S}
+
+your hand: 8h Qs
+{terminal stdin auto cleared once player presses return}
+player 3's turn: {C}
+
+Player 3 calls
+
+Player 4 (ai) folds
+Player 1 (ai) calls
+
+
+
+
+
+
+
+
+{stdi is auto cleared again}
+Flop:
+
+
+player 1 (ai)							player 2
+chips: 400       , - ~ ~ ~ - ,			chips: 340
+		     , D              UTG,		UTG
+		   ,                       ,
+		  ,                         ,
+		 ,                           ,
+		 ,        Kh 8s Jh           ,
+		 ,          130              ,
+		  ,                         ,
+		   ,                       ,
+		     ,                  , '
+Player 4 (ai) BB - , _ _ _ ,  SB		player 3 
+chips: 380								chips: 340
+
+			{ASCII art will need to be bigger to git community cards}
+
+
+			!!! PLAYER 2 !!!
+C - Check 					B - bet
+S - show cards				
+player 2's turn: {B}
+raise: C
+
+Player 2 checks
+
+			!!! PLAYER 3 !!!
+F - fold 					B - bet
+S - show cards
+player 3's turn: {B}
+Bet: 40
+
+Player 3 bets 40 chips
+
+Player 1 (ai) calls
+
+			!!! PLAYER 2 !!!
+F - Fold 					C - Call
+S - show cards				R - raise				
+player 2's turn: {C}
+
+Player 2 calls
+
+
+
+
+
+
+
+
+
+
+
+
+{stdi is auto cleared again}
+Turn:
+
+
+player 1 (ai)							player 2
+chips: 400       , - ~ ~ ~ - ,			chips: 300
+		     , D              UTG,		UTG
+		   ,                       ,
+		  ,                         ,
+		 ,                           ,
+		 ,      Kh 8s Jh 8c          ,
+		 ,             210           ,
+		  ,                         ,
+		   ,                       ,
+		     ,                  , '
+Player 4 (ai) BB - , _ _ _ ,  SB		player 3 
+chips: 380								chips: 300
+
+			{ASCII art will need to be bigger to git community cards}
+
+
+			!!! PLAYER 2 !!!
+C - Check 					B - bet
+S - show cards				
+player 2's turn: {B}
+raise: C
+
+Player 2 checks
+
+			!!! PLAYER 3 !!!
+F - fold 					B - bet
+S - show cards
+player 3's turn: {B}
+Bet: 80
+
+Player 3 bets 80 chips
+
+Player 1 (ai) folds
+
+			!!! PLAYER 2 !!!
+F - Fold 					C - Call
+S - show cards				R - raise				
+player 2's turn: {C}
+
+Player 2 calls
+
+
+
+
+
+
+
+
+
+
+
+
+
+{stdi is auto cleared again}
+Turn:
+
+
+player 1 (ai)							player 2
+chips: 400       , - ~ ~ ~ - ,			chips: 300
+		     , D              UTG,		UTG
+		   ,                       ,
+		  ,                         ,
+		 ,                           ,
+		 ,      Kh 8s Jh 8c Qh       ,
+		 ,           210             ,
+		  ,                         ,
+		   ,                       ,
+		     ,                  , '
+Player 4 (ai) BB - , _ _ _ ,  SB		player 3 
+chips: 380								chips: 300
+
+			{ASCII art will need to be bigger to git community cards}
+
+
+			!!! PLAYER 2 !!!
+C - Check 					B - bet
+S - show cards				
+player 2's turn: {S}
+your hand: 8h Qs (Full house, Eights full of Queens)
+{terminal stdin auto cleared once player presses return}
+
+C - Check 					B - bet
+S - show cards				
+player 2's turn: {B}
+Bet: 300
+
+player 2 goes all in!!!
+
+			!!! PLAYER 3 !!!
+F - fold 					C - call
+S - show cards
+player 3's turn: {C}
+
+player 3 calls
+
+Player 2 shows hand: 8h Qs == 8h Qs 8s 8c Qs 
+	Full house, Eights full of Queens
+
+Player 3 shows hand: Ah 10h == Ah 10h Kh Jh Qh 
+	Royal Flush
+
+Player 3 wins 810 chips
+Player 2 is out!	
+
+
+
+
+
+
+
