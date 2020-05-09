@@ -45,6 +45,10 @@ int leastSignificantBit(uint64_t number);
 void printbits(uint64_t number);
 int isStraightFlush(uint64_t h);
 int isFourOfAKind(uint64_t h);
+//NOT FINISHED
+int isThreeOfAKind(uint64_t h);
+//NOT FINISHED
+int isPair(uint64_t h);
 /*
 2^((4*i)+j) where i = 0...12 (value of 2 to A) and j == 0..3 (suits)
 */
@@ -64,11 +68,11 @@ int main(int argc, char* argv[]) {
     addCard(c5, d1, 4);
     showDeck(d1);
     uint64_t cardPairs = 0x0000000000000000;
-    uint64_t AH = pow(2,49);
+    uint64_t AH = pow(2,51);
     uint64_t KH = pow(2,46);
-    uint64_t QH = pow(2,17);
-    uint64_t JH = pow(2,16);
-    uint64_t TH = pow(2,14);
+    uint64_t QH = pow(2,33);
+    uint64_t JH = pow(2,22);
+    uint64_t TH = pow(2,16);
     uint64_t TS = pow(2,13);
     uint64_t NS = pow(2,12);
     cardPairs = cardPairs | NS | TS | AH | KH | QH | JH | TH;
@@ -86,6 +90,8 @@ int main(int argc, char* argv[]) {
     //printf("%llu\n", hh);
     isStraightFlush(cardPairs);
     isFourOfAKind(cardPairs);
+    isThreeOfAKind(cardPairs);
+    isPair(cardPairs);
     printbits(cardPairs);
     /*
     int i = 1;
@@ -188,6 +194,28 @@ int isFourOfAKind(uint64_t h) {
     uint64_t hh = h & (h>>1) & (h>>2) & (h>>3) & mask;
     if (hh > 0) {
         printf("four of a kind!\n");
+        return 1;
+    }
+    return 0;
+}
+
+int isThreeOfAKind(uint64_t h) {
+
+    uint64_t mask = 0x0001111111111111;
+    uint64_t hh = h & (h>>1) & (h>>2) & mask;
+    if (hh > 0) {
+        printf("three of a kind!\n");
+        return 1;
+    }
+    return 0;
+}
+
+int isPair(uint64_t h) {
+
+    uint64_t mask = 0x0001111111111111;
+    uint64_t hh = h & (h>>1) & mask;
+    if (hh > 0) {
+        printf("Pair!\n");
         return 1;
     }
     return 0;
