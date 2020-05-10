@@ -28,9 +28,14 @@ int main(void) {
 	addPlayer(dan, t);
 
 	// print table
-	//printTable(t);
+	printTable(t);
 
-	
+	// move buttons
+	moveButtons(t);
+
+	// print table
+	printTable(t);
+
 	// remove players from the table
 	removePlayer(t, 3);	// 5	
 	removePlayer(t, 2);	// 4
@@ -42,5 +47,4 @@ int main(void) {
 
 	// free table
 	freeTable(t);
-
 }
