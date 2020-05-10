@@ -94,10 +94,12 @@ Table newTable(void) {
 void freeTable(Table t) {
 	Player p = t->utg;
 
-	while (t != NULL) {
+	int i = 0;
+	while (p != NULL && i < nPlayers(t)) {
 		Player temp = p;
 		p = p->next;
 		freePlayer(temp);
+		i++;
 	}
 
 	freeDeck(t->communityCards);

@@ -30,13 +30,15 @@ int main(void) {
 	// print table
 	printTable(t);
 
+	/*
 	// free players
 	freePlayer(claude);
 	freePlayer(josh);
 	freePlayer(pat);
 	freePlayer(phil);
 	freePlayer(dan);
-
+	*/
+	
 	// free table
 	freeTable(t);
 
