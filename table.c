@@ -304,6 +304,8 @@ int playerChips(Player p) {
 	return p->chips;
 }
 
+
+// WORK IN PROGRESS
 void dealCards(Table t) {
 	if (t == NULL) {
 		printf("dealCards: must pass valid table\n");
@@ -317,4 +319,56 @@ void dealCards(Table t) {
 		cur = cur->next;
 	}
 }
+
+void retrieveCards(Table t) {
+	if (t == NULL) {
+		printf("retrieveCards: must pass valid table\n");
+		exit(1);
+	}
+
+	Player cur = t->utg;
+
+	for (int i = 0; i < nPlayers(t); i++) {
+		// get size of players hand
+
+
+
+		addCard(removeCard(t->mainDeck, 0), cur->hand, 0);
+		cur = cur->next;
+	}	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

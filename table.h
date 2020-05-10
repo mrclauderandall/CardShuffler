@@ -9,6 +9,7 @@ struct player {
 	int chips;
 	Player next;
 	Deck hand;
+	int hand_size;	// 2 for texas hold em, 4 for omaha (fuck omaha)
 	int button;	// 0 = utg, 1 = utg+1, 2 = utg+2,..., (nPlayers - 2) = SB, (nPlayers - 1) = BB
 	int bet;	// amount of bet for current round, reset to zero after each round
 };
@@ -52,8 +53,7 @@ void takeBlinds(Table t);
 void dealCards(Table t);
 
 // retrieve cards from players
-
-// add chips to the pot 
+void retrieveCards(Table t);
 
 // give pot to a player
 
