@@ -14,13 +14,12 @@ struct player {
 
 typedef struct table *Table;
 struct table {
-	Player Dealer, BigBlind, SmallBlind, UTG, cur;
-	int nPlayers, BB, SM, Ante;
-	Deck communityCards;
+	Player utg;
+	int nPlayers, BB, SB, Ante;
+	Deck mainDeck, communityCards;
 	int street;	// 0 = preflop, 1 = flop, 2 = turn, 3 = river, 4 = showdown
 	int pot;
 	int bet;	// bet amount for current street
-	Player better;	// player that made the bet
 };
 
 
@@ -30,14 +29,17 @@ struct table {
 // create a new player
 Player newPlayer(char *name, int chips);
 
-// free a player'
+// free a player
 void freePlayer(Player p);
 
 // create a new table
+Table newTable(void);
 
-// free a table
+// free a table and all the players at the table
+void freeTable(Table t);
 
 // add a player to a table
+void addPlayer(Player p, Table t);
 
 // remove a player from a table
 
@@ -58,7 +60,11 @@ void freePlayer(Player p);
 // print player data
 void printPlayer(Player p);
 
+// print table
+void printTable(Table t);
 
+// return the number of players on a table
+int nPlayers(Table t);
 
 
 
