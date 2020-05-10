@@ -55,7 +55,8 @@ void freePlayer(Player p);
 
 // player makes a move
 
-
+// print player data
+void printPlayer(Player p);
 
 
 

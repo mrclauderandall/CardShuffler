@@ -103,7 +103,7 @@ Card removeCard(Deck d, int pos);
 Deck copyDeck(Deck d);
 
 // print out entire deck to stdin
-void showDeck(Deck d);
+void printDeck(Deck d);
 
 // print a card
 void printCard(Card c);

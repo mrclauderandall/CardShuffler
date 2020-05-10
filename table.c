@@ -11,8 +11,9 @@ Player newPlayer(char *name, int chips) {
 		exit(EXIT_FAILURE);
 	}
 
+
 	p->name = malloc(sizeof(name));
-	p->name = stpcpy(p->name, name);
+	p->name = name;
 	p->chips = chips;
 	p->next = NULL;
 	p->hand = newEmptyDeck();
@@ -23,6 +24,26 @@ Player newPlayer(char *name, int chips) {
 
 
 void freePlayer(Player p) {
+	p->next = NULL;
+	free(p->name);
+	freeDeck(p->hand);
+	free(p);
+}
 
-	return;
+void printPlayer(Player p) {
+	
+	// check valid player
+	if (p == NULL) {
+		printf("X\n");
+		return;
+	}
+
+	printf("Player %s:\n", p->name);
+	printf("chips: %d\n", p->chips);
+	if (p->next == NULL) {
+		printf("next player: X\n");
+	} else {
+		printf("next player: %s\n" p->next->name);
+	}
+	
 }

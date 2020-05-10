@@ -164,7 +164,7 @@ void addCard(Card c, Deck d, int pos) {
 Card removeCard(Deck d, int pos) {
 	if (deckSize(d) == 0) {
 		printf("cannot remove a card from an empty deck:\ndeck given:\n");
-		showDeck(d);
+		printDeck(d);
 		exit(1);
 	}
 
@@ -213,7 +213,7 @@ Card removeCard(Deck d, int pos) {
 }
 
 // print out entire deck to stdin
-void showDeck(Deck d) {
+void printDeck(Deck d) {
 
 	Card cur = d->top;
 

@@ -21,7 +21,7 @@ int main(void) {
 
 	// show deck
 	printf("original deck:\n");
-	showDeck(d);
+	printDeck(d);
 
 	// riffle shuffle deck
 	for (i = 0; i < 10000; i++) {
@@ -30,7 +30,7 @@ int main(void) {
 
 	// show deck
 	printf("\nsame deck after %d shuffle:\n", i);
-	showDeck(d);
+	printDeck(d);
 
 	// print the order retainment of the shuffled deck
 	int order = orderRetainment(D, d);
@@ -271,11 +271,11 @@ void test_removeCard(void) {
 	// CASE 3: remove all the cards from a standard deck from the bottom
 	Deck fulldeck = newStandardDeck();
 	int size = deckSize(fulldeck);
-	showDeck(fulldeck);
+	printDeck(fulldeck);
 
 	for (int i = 0; i < size; i++) {
 		c = removeCard(fulldeck, 26);
-		showDeck(fulldeck);
+		printDeck(fulldeck);
 	}
 
 	assert(deckSize(fulldeck) == 0);
