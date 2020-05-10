@@ -17,7 +17,7 @@ Player newPlayer(char *name, int chips) {
 	p->chips = chips;
 	p->next = NULL;
 	p->hand = newEmptyDeck();
-	p->pos = -1;
+	p->button = -1;
 
 	return p;
 }
@@ -57,7 +57,7 @@ void printPlayer(Player p) {
 	printf("\n");
 
 	// print players position
-	printf("pos = %d\n", p->pos);
+	printf("button = %d\n", p->button);
 
 }
 
@@ -118,7 +118,7 @@ void addPlayer(Player p, Table t) {
 	// add player to table
 	if (nPlayers(t) == 0) {
 		t->utg = p;
-		p->pos = 0;
+		p->button = 0;
 	} else if (nPlayers(t) > 8) {
 		printf("cannot add more than 9 players to a table\n");
 		return;
@@ -131,7 +131,7 @@ void addPlayer(Player p, Table t) {
 		}
 
 		cur->next = p;
-		p->pos = i;
+		p->button = i;
 		p->next = t->utg;
 	}
 
@@ -166,9 +166,9 @@ void printTable(Table t) {
 	}
 }
 
-void removePlayer(Table t, int pos) {
+void removePlayer(Table t, int button) {
 
-	if (nPlayers(t) == 0 || pos >= nPlayers(t)) return;
+	if (nPlayers(t) == 0 || button >= nPlayers(t)) return;
 
 	Player cur = t->utg;
 
@@ -176,12 +176,12 @@ void removePlayer(Table t, int pos) {
 		t->utg = NULL;
 		freePlayer(cur);
 	} else {
-		while (cur->next->pos != pos) {
+		while (cur->next->button != button) {
 			cur = cur->next;
 		}
 		
 		// check if next is utg
-		if (cur->next->pos == t->utg->pos) {
+		if (cur->next->button == t->utg->button) {
 			t->utg = t->utg->next;
 		}
 
@@ -190,8 +190,8 @@ void removePlayer(Table t, int pos) {
 		freePlayer(temp);
 
 		// adjust the position of the remaining players
-		for (int i = 0; i < nPlayers(t) -1; i++) {
-			if (cur->pos > pos) cur->pos--;
+		for (int i = 1; i < nPlayers(t); i++) {
+			if (cur->button > button) cur->button--;
 			cur = cur->next;
 		}
 		
@@ -200,6 +200,20 @@ void removePlayer(Table t, int pos) {
 	t->nPlayers--;
 }
 
+void moveButtons(Table t) {
+	// check valid table
+	if (t == NULL) {
+		printf("moveButtons: must pass valid table\n");
+		return;
+	}
 
+	t->utg->button = nPlayers(t) - 1;
+	t->utg = t->utg->next;
+	Player cur = t->utg;
+	for (int i = 1; i < nPlayers(t); i++) {
+		cur->button--;
+		cur = cur->next;
+	}
+}
 
 

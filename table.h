@@ -9,7 +9,7 @@ struct player {
 	int chips;
 	Player next;
 	Deck hand;
-	int pos;	// used to indicate position on table, bb, sb, dealer, utg
+	int button;	// 0 = utg, 1 = utg+1, 2 = utg+2,..., (nPlayers - 2) = SB, (nPlayers - 1) = BB
 };
 
 typedef struct table *Table;
@@ -44,10 +44,8 @@ void addPlayer(Player p, Table t);
 // remove and free player from a table
 void removePlayer(Table t, int pos);
 
-// assign positions to the players
-
 // move player positions
-
+void moveButtons(Table t);
 // deal cards to players
 
 // retrieve cards from players
