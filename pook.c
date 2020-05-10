@@ -28,15 +28,15 @@ int main(void) {
 	addPlayer(dan, t);
 
 	// print table
-	printTable(t);
+	//printTable(t);
 
 	
 	// remove players from the table
 	removePlayer(t, 3);	// 5	
 	removePlayer(t, 2);	// 4
 	removePlayer(t, 0);	// 3
-	printf("after removing players, 3, 2, 0:\n");
-	printTable(t);
+	//printf("after removing players, 3, 2, 0:\n");
+	//printTable(t);
 	removePlayer(t, 1);	// 2
 	removePlayer(t, 0);	// 1
 
