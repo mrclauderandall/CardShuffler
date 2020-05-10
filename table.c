@@ -1,6 +1,7 @@
 // implamentation of table 
 
 #include "table.h"
+#include <string.h>
 
 Player newPlayer(char *name, int chips) {
 	Player p = malloc(sizeof(*p));
@@ -15,7 +16,13 @@ Player newPlayer(char *name, int chips) {
 	p->chips = chips;
 	p->next = NULL;
 	p->hand = newEmptyDeck();
-	int p->pos = -1;
+	p->pos = -1;
 
 	return p;
+}
+
+
+void freePlayer(Player p) {
+
+	return;
 }
