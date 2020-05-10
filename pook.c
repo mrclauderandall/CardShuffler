@@ -11,11 +11,11 @@
 
 int main(void) {
 	// create a new player
-	Player p = newPlayer("Claude", 500);
+	Player p = newPlayer("Claude", 100000000);
 
 	// print player
 	printPlayer(p);
-	
+
 	// free Player p
 	freePlayer(p);
 

@@ -212,26 +212,22 @@ Card removeCard(Deck d, int pos) {
 	return cur;
 }
 
-// print out entire deck to stdin
+
+// print out entire deck from top to bottom
 void printDeck(Deck d) {
 
 	Card cur = d->top;
 
 	if (cur == NULL) {
-		printf("this deck is empty\n");
+		printf("X");
 		return;
 	}
 
-	printf("size: %d\n", deckSize(d));
-	printf("TOP-> ");
 	while (cur != NULL) {
-
 		printCard(cur);
 		printf(" ");
-
 		cur = cur->bellow;
 	}
-	printf("<-BOTTOM\n");
 }
 
 // free all memory used for the deck

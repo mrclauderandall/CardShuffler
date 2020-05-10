@@ -25,7 +25,7 @@ Player newPlayer(char *name, int chips) {
 
 void freePlayer(Player p) {
 	p->next = NULL;
-	free(p->name);
+	//free(p->name);
 	freeDeck(p->hand);
 	free(p);
 }
@@ -38,12 +38,25 @@ void printPlayer(Player p) {
 		return;
 	}
 
+	// print players name
 	printf("Player %s:\n", p->name);
+
+	// print players chips
 	printf("chips: %d\n", p->chips);
+
+	// print the name of the player next to player p
 	if (p->next == NULL) {
 		printf("next player: X\n");
 	} else {
-		printf("next player: %s\n" p->next->name);
+		printf("next player: %s\n", p->next->name);
 	}
-	
+
+	// print the players hand
+	printf("hand: ");
+	printDeck(p->hand);
+	printf("\n");
+
+	// print players position
+	printf("pos = %d\n", p->pos);
+
 }

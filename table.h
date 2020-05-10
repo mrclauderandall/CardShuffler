@@ -5,9 +5,9 @@
 
 typedef struct player *Player;
 struct player {
+	char *name;
 	int chips;
 	Player next;
-	char *name;
 	Deck hand;
 	int pos;	// used to indicate position on table, bb, sb, dealer, utg
 };
