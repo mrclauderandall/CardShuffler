@@ -66,13 +66,13 @@ int main(int argc, char* argv[]) {
     addCard(c3, d1, 2);
     addCard(c4, d1, 3);
     addCard(c5, d1, 4);
-    showDeck(d1);
+    printDeck(d1);
     uint64_t cardPairs = 0x0000000000000000;
     uint64_t AH = pow(2,51);
-    uint64_t KH = pow(2,46);
-    uint64_t QH = pow(2,33);
-    uint64_t JH = pow(2,22);
-    uint64_t TH = pow(2,16);
+    uint64_t KH = pow(2,50);
+    uint64_t QH = pow(2,47);
+    uint64_t JH = pow(2,46);
+    uint64_t TH = pow(2,22);
     uint64_t TS = pow(2,13);
     uint64_t NS = pow(2,12);
     cardPairs = cardPairs | NS | TS | AH | KH | QH | JH | TH;
@@ -93,6 +93,14 @@ int main(int argc, char* argv[]) {
     isThreeOfAKind(cardPairs);
     isPair(cardPairs);
     printbits(cardPairs);
+    /*
+    uint64_t w = cardPairs - ((cardPairs >> 1) & 0x0005555555555555);
+    w = (w & 0x0003333333333333) + ((w >> 2) & 0x0003333333333333);
+    printbits(w);
+    if ((w & 0xf00) == 0x300){
+        printf("HI!\n");
+    }
+    */
     /*
     int i = 1;
     while(i < argc) {
@@ -200,7 +208,7 @@ int isFourOfAKind(uint64_t h) {
 }
 
 int isThreeOfAKind(uint64_t h) {
-
+/*
     uint64_t mask = 0x0001111111111111;
     uint64_t hh = h & (h>>1) & (h>>2) & mask;
     if (hh > 0) {
@@ -208,10 +216,81 @@ int isThreeOfAKind(uint64_t h) {
         return 1;
     }
     return 0;
+*/
+    uint64_t w = h - ((h >> 1) & 0x0005555555555555);
+    w = (w & 0x0003333333333333) + ((w >> 2) & 0x0003333333333333);
+    uint64_t mask1 = 0x000f000000000000;
+    uint64_t mask2 = 0x0003000000000000;
+    int counter = 14;
+    int full_house_flag = 0;
+    int full_house_trips = 0;
+    while (counter >= 2) {
+        if ((w & mask1) == mask2) {
+            if (full_house_flag == 1) {
+                switch (full_house_trips){
+                case (14):
+                    printf("Full House, A's full of ");
+                    break;
+                case (13):
+                    printf("Full House, K's full of ");
+                    break;
+                case (12):
+                    printf("Full House, Q's full of ");
+                    break;
+                case (11):
+                    printf("Full House, J's full of ");
+                    break;
+                default:
+                    printf("Full House, J's full of %d ", full_house_trips);
+                }
+                switch (counter) {
+                case (13):
+                    printf("K's\n");
+                    break;
+                case (12):
+                    printf("Q's\n");
+                    break;
+                case (11):
+                    printf("J's\n");
+                    break;
+                default:
+                    printf("%d's\n", counter);
+                }
+                break;
+                return 1;
+            } else {
+                full_house_flag = 1;
+                full_house_trips = counter;
+                switch (counter){
+                case (14):
+                    printf("Three of a kind A's\n");
+                    break;
+                case (13):
+                    printf("Three of a kind K's\n");
+                    break;
+                case (12):
+                    printf("Three of a kind Q's\n");
+                    break;
+                case (11):
+                    printf("Three of a kind Q's\n");
+                    break;
+                default:
+                    printf("Three of a kind %d's\n", counter);
+                }
+            }
+    //        break;
+    //        return 1;
+        }
+        mask1 = (mask1>>4);
+        mask2 = (mask2>>4);
+        counter--;
+    }
+
+    return 0;
 }
 
 int isPair(uint64_t h) {
-
+/*
     uint64_t mask = 0x0001111111111111;
     uint64_t hh = h & (h>>1) & mask;
     if (hh > 0) {
@@ -219,6 +298,44 @@ int isPair(uint64_t h) {
         return 1;
     }
     return 0;
+*/
+
+    uint64_t w = h - ((h >> 1) & 0x0005555555555555);
+    w = (w & 0x0003333333333333) + ((w >> 2) & 0x0003333333333333);
+    uint64_t mask1 = 0x000f000000000000;
+    uint64_t mask2 = 0x0002000000000000;
+    int counter = 14;
+    int pair_counter = 0;
+    while (counter >= 2) {
+        if (((w & mask1) == mask2) && (pair_counter < 2)) {
+            switch (counter){
+                case (14):
+                    printf("Pair of A's\n");
+                    break;
+                case (13):
+                    printf("Pair of K's\n");
+                    break;
+                case (12):
+                    printf("Pair of Q's\n");
+                    break;
+                case (11):
+                    printf("Pair of J's\n");
+                    break;
+                default:
+                    printf("Pair of %d's\n", counter);
+            }
+
+            pair_counter++;
+            //break;
+            //return 1;
+        }
+        mask1 = (mask1>>4);
+        mask2 = (mask2>>4);
+        counter--;
+    }
+
+    return 0;
+
 }
 
 int leastSignificantBit(uint64_t number) {
