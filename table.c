@@ -166,7 +166,39 @@ void printTable(Table t) {
 	}
 }
 
+void removePlayer(Table t, int pos) {
 
+	if (nPlayers(t) == 0 || pos >= nPlayers(t)) return;
+
+	Player cur = t->utg;
+
+	if (cur->next == NULL) {
+		t->utg = NULL;
+		freePlayer(cur);
+	} else {
+		while (cur->next->pos != pos) {
+			cur = cur->next;
+		}
+		
+		// check if next is utg
+		if (cur->next->pos == t->utg->pos) {
+			t->utg = t->utg->next;
+		}
+
+		Player temp = cur->next;
+		cur->next = cur->next->next;
+		freePlayer(temp);
+
+		// adjust the position of the remaining players
+		for (int i = 0; i < nPlayers(t) -1; i++) {
+			if (cur->pos > pos) cur->pos--;
+			cur = cur->next;
+		}
+		
+	}
+
+	t->nPlayers--;
+}
 
 
 

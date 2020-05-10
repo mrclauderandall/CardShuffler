@@ -41,7 +41,8 @@ void freeTable(Table t);
 // add a player to a table
 void addPlayer(Player p, Table t);
 
-// remove a player from a table
+// remove and free player from a table
+void removePlayer(Table t, int pos);
 
 // assign positions to the players
 
