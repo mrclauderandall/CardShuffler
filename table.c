@@ -160,6 +160,7 @@ void printTable(Table t) {
 	printf("players: (starting at utg)\n");
 	int i = 0;
 	while(p != NULL && i < nPlayers(t)) {
+		printf("\n\n\n");
 		printPlayer(p);
 		p = p->next;
 		i++;
@@ -216,4 +217,104 @@ void moveButtons(Table t) {
 	}
 }
 
+void takeBlinds(Table t) {
+	// check valid table
+	if (t == NULL) {
+		printf("moveButtons: must pass valid table\n");
+		return;
+	}
+
+	Player cur = t->utg;
+	for (int i = 1; i < nPlayers(t); i++) {
+		if (cur->button == nPlayers(t) - 1) {
+			playerBet(t, cur, bigBlind(t));
+		} else if (cur->button == nPlayers(t) - 2) {
+			playerBet(t, cur, smallBlind(t));
+		} else {
+			playerBet(t, cur, ante(t));
+		}
+
+		cur = cur->next;
+	}	
+}
+
+void playerBet(Table t, Player p, int bet) {
+	// check valid table and player
+	if (t == NULL || p == NULL) {
+		printf("playerBet: must pass valid table and player\n");
+		return;
+	}
+
+	// check player has enough chips
+	if (bet > playerChips(p)) {
+		printf("player does not have enough chips\n");
+		return;
+	}
+
+	// remove chips from player
+	p->chips -= bet;
+
+	// add chips to bot
+	t->pot += bet;
+
+	// set players bet amount
+	p->bet = bet;
+
+	// set bet amount for table
+	if (bet > t->bet) {
+		t->bet = bet;
+	}
+}
+
+// return small blind amount
+int smallBlind(Table t) {
+	if (t == NULL) {
+		printf("smallBlind: must pass valid table\n");
+		exit(1);
+	}
+
+	return t->SB;	
+}
+
+// return bigblind amount
+int bigBlind(Table t) {
+	if (t == NULL) {
+		printf("bigBlind: must pass valid table\n");
+		exit(1);
+	}
+
+	return t->BB;
+}
+
+int ante(Table t) {
+	if (t == NULL) {
+		printf("ante: must pass valid table\n");
+		exit(1);
+	}
+
+	return t->Ante;
+}
+
+int playerChips(Player p) {
+	if (p == NULL) {
+		printf("playerChips: must pass valid table\n");
+		exit(1);
+	}
+
+	return p->chips;
+}
+
+void dealCards(Table t) {
+	if (t == NULL) {
+		printf("dealCards: must pass valid table\n");
+		exit(1);
+	}
+
+	Player cur = t->utg;
+
+	for (int i = 0; i < 2*nPlayers(t); i++) {
+		addCard(removeCard(t->mainDeck, 0), cur->hand, 0);
+		cur = cur->next;
+	}
+}
 

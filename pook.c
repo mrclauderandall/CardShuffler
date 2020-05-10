@@ -30,8 +30,8 @@ int main(void) {
 	// print table
 	printTable(t);
 
-	// move buttons
-	moveButtons(t);
+	// deal cards to the players
+	dealCards(t);
 
 	// print table
 	printTable(t);
