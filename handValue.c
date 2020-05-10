@@ -49,6 +49,7 @@ int isFourOfAKind(uint64_t h);
 int isThreeOfAKind(uint64_t h);
 //NOT FINISHED
 int isPair(uint64_t h);
+int isFullHousePair(uint64_t h);
 /*
 2^((4*i)+j) where i = 0...12 (value of 2 to A) and j == 0..3 (suits)
 */
@@ -70,9 +71,9 @@ int main(int argc, char* argv[]) {
     uint64_t cardPairs = 0x0000000000000000;
     uint64_t AH = pow(2,51);
     uint64_t KH = pow(2,50);
-    uint64_t QH = pow(2,47);
-    uint64_t JH = pow(2,46);
-    uint64_t TH = pow(2,22);
+    uint64_t QH = pow(2,49);
+    uint64_t JH = pow(2,47);
+    uint64_t TH = pow(2,46);
     uint64_t TS = pow(2,13);
     uint64_t NS = pow(2,12);
     cardPairs = cardPairs | NS | TS | AH | KH | QH | JH | TH;
@@ -241,7 +242,7 @@ int isThreeOfAKind(uint64_t h) {
                     printf("Full House, J's full of ");
                     break;
                 default:
-                    printf("Full House, J's full of %d ", full_house_trips);
+                    printf("Full House, %d's full of ", full_house_trips);
                 }
                 switch (counter) {
                 case (13):
@@ -256,8 +257,7 @@ int isThreeOfAKind(uint64_t h) {
                 default:
                     printf("%d's\n", counter);
                 }
-                break;
-                return 1;
+                return 2;
             } else {
                 full_house_flag = 1;
                 full_house_trips = counter;
@@ -285,8 +285,39 @@ int isThreeOfAKind(uint64_t h) {
         mask2 = (mask2>>4);
         counter--;
     }
-
-    return 0;
+    int FHP = isFullHousePair(h);
+    if (full_house_flag == 1 && FHP > 0) {
+        switch (full_house_trips){
+        case (14):
+            printf("Full House, A's full of ");
+            break;
+        case (13):
+            printf("Full House, K's full of ");
+            break;
+        case (12):
+            printf("Full House, Q's full of ");
+            break;
+        case (11):
+            printf("Full House, J's full of ");
+            break;
+        default:
+            printf("Full House, %d's full of ", full_house_trips);
+        }
+        switch (FHP) {
+        case (13):
+            printf("K's\n");
+            break;
+        case (12):
+            printf("Q's\n");
+            break;
+        case (11):
+            printf("J's\n");
+            break;
+        default:
+            printf("%d's\n", FHP);
+        }
+    }
+    return full_house_flag;
 }
 
 int isPair(uint64_t h) {
@@ -306,8 +337,8 @@ int isPair(uint64_t h) {
     uint64_t mask2 = 0x0002000000000000;
     int counter = 14;
     int pair_counter = 0;
-    while (counter >= 2) {
-        if (((w & mask1) == mask2) && (pair_counter < 2)) {
+    while ((counter >= 2) && (pair_counter < 2)) {
+        if (((w & mask1) == mask2) ) {
             switch (counter){
                 case (14):
                     printf("Pair of A's\n");
@@ -334,9 +365,29 @@ int isPair(uint64_t h) {
         counter--;
     }
 
+    return pair_counter;
+
+}
+
+int isFullHousePair(uint64_t h) {
+    uint64_t w = h - ((h >> 1) & 0x0005555555555555);
+    w = (w & 0x0003333333333333) + ((w >> 2) & 0x0003333333333333);
+    uint64_t mask1 = 0x000f000000000000;
+    uint64_t mask2 = 0x0002000000000000;
+    int counter = 14;
+    while ((counter >= 2)) {
+        if (((w & mask1) == mask2) ) {
+            return counter;
+        }
+        mask1 = (mask1>>4);
+        mask2 = (mask2>>4);
+        counter--;
+    }
+
     return 0;
 
 }
+
 
 int leastSignificantBit(uint64_t number) {
     int index = 0;
