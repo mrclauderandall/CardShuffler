@@ -28,13 +28,13 @@ int main(void) {
 	addPlayer(dan, t);
 
 	// print table
-	printTable(t);
+	//printTable(t);
 
 	// deal cards to the players
 	dealCards(t);
 
 	// print table
-	printTable(t);
+	//printTable(t);
 
 	// remove players from the table
 	removePlayer(t, 3);	// 5	
