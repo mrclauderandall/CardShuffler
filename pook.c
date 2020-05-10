@@ -9,7 +9,17 @@
 #include "table.h"
 
 
+void test_dealCards(void);
+
+
 int main(void) {
+	
+	//test_dealCards();
+
+
+
+
+
 	// create 5 new players
 	Player claude = newPlayer("Claude", 1000);
 	Player josh = newPlayer("Josh", 3);
@@ -28,23 +38,89 @@ int main(void) {
 	addPlayer(dan, t);
 
 	// print table
-	//printTable(t);
+	printTable(t);
 
 	// deal cards to the players
 	dealCards(t);
 
 	// print table
-	//printTable(t);
+	printTable(t);
 
 	// remove players from the table
 	removePlayer(t, 3);	// 5	
 	removePlayer(t, 2);	// 4
 	removePlayer(t, 0);	// 3
-	//printf("after removing players, 3, 2, 0:\n");
-	//printTable(t);
 	removePlayer(t, 1);	// 2
 	removePlayer(t, 0);	// 1
 
 	// free table
 	freeTable(t);
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void test_dealCards(void) {
+	
+		/* !!! CASE 0 !!! */
+	// deal cards to an empty table
+	Table empty_table = newTable();
+	printTable(empty_table);
+	dealCards(empty_table);
+	printTable(empty_table);
+	freeTable(empty_table);
+
+		/* !!! CASE 1 !!! */ 
+
+		/* !!! CASE 2 !!! */ 
+
+		/* !!! CASE 3 !!! */ 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
