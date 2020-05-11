@@ -50,6 +50,7 @@ int isThreeOfAKind(uint64_t h);
 //NOT FINISHED
 int isPair(uint64_t h);
 int isFullHousePair(uint64_t h);
+int isStraight(uint64_t h);
 /*
 2^((4*i)+j) where i = 0...12 (value of 2 to A) and j == 0..3 (suits)
 */
@@ -70,11 +71,11 @@ int main(int argc, char* argv[]) {
     printDeck(d1);
     uint64_t cardPairs = 0x0000000000000000;
     uint64_t AH = pow(2,51);
-    uint64_t KH = pow(2,50);
-    uint64_t QH = pow(2,49);
-    uint64_t JH = pow(2,47);
-    uint64_t TH = pow(2,46);
-    uint64_t TS = pow(2,13);
+    uint64_t KH = pow(2,33);
+    uint64_t QH = pow(2,28);
+    uint64_t JH = pow(2,24);
+    uint64_t TH = pow(2,20);
+    uint64_t TS = pow(2,17);
     uint64_t NS = pow(2,12);
     cardPairs = cardPairs | NS | TS | AH | KH | QH | JH | TH;
     uint64_t logster = cardPairs & -cardPairs;
@@ -91,6 +92,7 @@ int main(int argc, char* argv[]) {
     //printf("%llu\n", hh);
     isStraightFlush(cardPairs);
     isFourOfAKind(cardPairs);
+    isStraight(cardPairs);
     isThreeOfAKind(cardPairs);
     isPair(cardPairs);
     printbits(cardPairs);
@@ -208,6 +210,55 @@ int isFourOfAKind(uint64_t h) {
     return 0;
 }
 
+int isStraight(uint64_t h) {
+    uint64_t w = h - ((h >> 1) & 0x0005555555555555);
+    w = (w & 0x0003333333333333) + ((w >> 2) & 0x0003333333333333);
+    uint64_t mask1 = 0x000f000000000000;
+    uint64_t mask2 = 0x0001000000000000;
+    int straight_counter = 0;
+    int start_straight = 0;
+    int end_straight = 0;
+    int counter = 14;
+    while ((counter >= 2) && (start_straight == 0)) {
+        if ((w & mask1) == mask2) {
+            straight_counter++;
+            if (straight_counter == 1) {
+                end_straight = counter;
+            }
+            if (straight_counter == 5) {
+                start_straight = counter;
+                break;
+            }
+        } else {
+            straight_counter = 0;
+            end_straight = 0;
+        }
+        mask1 = (mask1>>4);
+        mask2 = (mask2>>4);
+        counter--;
+    }
+    if (start_straight > 0 && end_straight > 0) {
+        printf("Straight: %d to ", start_straight);
+        switch (end_straight) {
+        case (14):
+            printf("A\n");
+            break;
+        case (13):
+            printf("K\n");
+            break;
+        case (12):
+            printf("Q\n");
+            break;
+        case (11):
+            printf("J\n");
+            break;
+        default:
+            printf("%d\n", end_straight);
+        }
+    }
+    return 0;
+}
+
 int isThreeOfAKind(uint64_t h) {
 /*
     uint64_t mask = 0x0001111111111111;
@@ -304,6 +355,9 @@ int isThreeOfAKind(uint64_t h) {
             printf("Full House, %d's full of ", full_house_trips);
         }
         switch (FHP) {
+        case (14):
+            printf("A's\n");
+            break;
         case (13):
             printf("K's\n");
             break;
