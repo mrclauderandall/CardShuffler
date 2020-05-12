@@ -4,11 +4,9 @@
 #define TABLE_H
 
 #include <stdlib.h>
-#include "deck.h"
 
 typedef struct player *Player;
 typedef struct table *Table;
-
 
 // create a new player
 Player newPlayer(char *name, int chips);

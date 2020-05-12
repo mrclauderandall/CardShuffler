@@ -60,7 +60,7 @@ int randomB(int a, int lower, int upper);
 /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ Card ADT functions ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
 /*  ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
 
-Card newCard(char suit, int value) {
+Card newCard(int suit, int value) {
 	Card c = malloc(sizeof(struct card));
 
 	if (c == NULL) {
@@ -287,6 +287,9 @@ Deck newEmptyDeck(void) {
 }
 
 void freeDeck(Deck d) {
+	if (d == NULL) return;
+
+
 	Card c = d->top;
 
 	while (c != NULL) {
@@ -537,7 +540,39 @@ void printCard(Card c) {
 	}
 }
 
+void printC(Card c) {
+	assert (c != NULL);
+	printf("%d%d", c->value, c->suit);
+}
 
+void printD(Deck d) {
+	Card cur = d->top;
+
+	if (cur == NULL) {
+		printf("X");
+		return;
+	}
+
+	printf("(vs): ");
+	while (cur != NULL) {
+		printC(cur);
+		printf(" ");
+		cur = cur->bellow;
+	}
+}
+
+Deck newTestDeck(void) {
+	Deck d = newEmptyDeck();
+
+	for (int s = 0; s < 4; s++) {
+		for (int v = 0; v < 10; v++) {
+			Card c = newCard(s, v);
+			addCard(c, d, -1);
+		}
+	}
+
+	return d;
+}
 
 
 

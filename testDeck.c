@@ -14,53 +14,90 @@
 void test_addCard(void);
 void test_removeCard(void);
 void shuffle_test(void);
+void test_getCard(void);
 
 int main(void) {
-	Deck d1 = newStandardDeck(); 	// uses: newEmptyDeck, newCard, addCard
-	Deck d2 = newStandardDeck();
 
-	//printDeck(d1);					// uses: printCard
-	assert(equivalentDecks(d1, d2));
-	Card c = removeCard(d1, 5);			// uses: -
-	assert(!equivalentDecks(d1, d2));
-
-	freeDeck(d1);					// uses: freeCard
-	freeDeck(d2);					// uses: freeCard
+	test_getCard();
 
 
 	return 0;
 }
 
 
-void shuffle_test(void) {
-	return;
+
+void test_getCard(void) {
+	// attempt to get card from NULL deck
+	Deck d = NULL;
+	Card c = getCard(d, 0);
+	assert(c == NULL);
+	freeDeck(d);
+
+	// get top card from an empty deck
+	d = newEmptyDeck();
+	c = getCard(d, 0);
+	assert(c == NULL);
+
+	// get bottom card from an empty deck
+	d = newEmptyDeck();
+	c = getCard(d, -1);
+	assert(c == NULL);
+	c = getCard(d, 5);
+	assert(c == NULL);
+
+	// get top card from a 1 card deck
+	assert(deckSize(d) == 0);
+	c = newCard(0, 0);
+	addCard(c, d, 0);
+	assert(deckSize(d) == 1);
+	Card get_c = getCard(d, 0);
+	assert(deckSize(d) == 1);
+	assert(valueCard(c) == 0);
+	assert(suitCard(c) == 0);
+	freeDeck(d);
+
+	// get pos 1 card from 3 card deck
+	d = newEmptyDeck();
+	addCard(newCard(0, 0), d, -1);
+	addCard(newCard(0, 1), d, -1);
+	addCard(newCard(0, 2), d, -1);
+	assert(deckSize(d) == 3);
+	c = getCard(d, 0);
+	assert(suitCard(c) == 0);
+	assert(valueCard(c) == 0);
+	c = getCard(d, 1);
+	assert(suitCard(c) == 0);
+	assert(valueCard(c) == 1);
+	c = getCard(d, 2);
+	assert(suitCard(c) == 0);
+	assert(valueCard(c) == 2);
+	freeDeck(d);
+
+	// get pos 8 card from testing deck
+	d = newTestDeck();
+	c = getCard(d, 8);
+	assert(valueCard(c) == 8);
+	assert(suitCard(c) == 0);
+	assert(deckSize(d) == 40);
+
+	// get top card from testing deck
+	c = getCard(d, 0);
+	assert(valueCard(c) == 0);
+	assert(suitCard(c) == 0);
+
+
+	// get bottom card from testing deck
+	c = getCard(d, -1);
+	assert(valueCard(c) == 9);
+	assert(suitCard(c) == 3);
+
+	free(d);
+	printf("[getCard] all tests passed!!\n");
 }
 
 
 
 
-
-void test_newCard(void) {
-	/*
-	Inputs: 
-		suit	any int
-		value	any int
-
-	Outputs:
-		c 		Card with value and suit set
-
-
-	*/
-}
-
-
-
-
-
-
-
-
-/*
 void test_addCard(void) {
 
 	// CASE 1: empty deck
@@ -113,6 +150,9 @@ void test_addCard(void) {
 	printf("t_addCard: test 3 passed\n");
 }
 
+
+
+/*
 void test_removeCard(void) {
 
 	// CASE 1: attempt to remove a card from an empty deck

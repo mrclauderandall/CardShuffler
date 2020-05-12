@@ -13,6 +13,7 @@ typedef struct deck *Deck;
 
 
 /*
+NOTES:
 	testing stutus for each function:
 		A 	Assumed functional. function is simply enough 
 			to assume that it works well
@@ -20,8 +21,39 @@ typedef struct deck *Deck;
 			not been tested and could have errors
 		F   functional. this function has been tested and 
 			works well
-*/
 
+	deck card positions are 0 indexed:
+		top->0->1->2-> ... ->last card
+		use pos = -1 to indicate bottom of deck
+
+	standard deck suit/value keys:
+			suits:
+			0	hearts
+			1	clubs
+			2	diomonds
+			3	spades
+
+		values:
+			2	0
+			3	1
+			4	2
+			5	3
+			6	4
+			7	5
+			8	6
+			9	7
+			10	8
+			J	9
+			Q	10
+			K	11
+			A   12
+
+	testing deck suit/value keys:
+		suits:	0, 1, 2, 3
+		values:	0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+		order: 00, 01, 02, 03, ..., 37, 38, 39
+
+*/
 
 
 
@@ -30,7 +62,7 @@ typedef struct deck *Deck;
 	note: avoid adding the same card to more than 
 	one deck at a time
 */
-Card newCard(char suit, int value);			// A
+Card newCard(int suit, int value);			// A
 
 /*
 	return a new card with the same 
@@ -51,52 +83,15 @@ Deck newEmptyDeck(void);					// A
 int deckSize(Deck d);						// A
 
 // create a new standard ordered deck
-/*
-	suits:
-		0	hearts
-		1	clubs
-		2	diomonds
-		3	spades
-
-	values:
-		2	0
-		3	1
-		4	2
-		5	3
-		6	4
-		7	5
-		8	6
-		9	7
-		10	8
-		J	9
-		Q	10
-		K	11
-		A   12
-*/
 Deck newStandardDeck(void);					// A
 
-/*
-	add a card to the deck in position pos
-	e.g:
-	0  -> insert on top of deck
-	1  -> insert card under the current top card
-	4  -> insert card under the current 4th card
-	-1 -> insert card at the bottom of the deck
-	if pos > size of deck, add card to the bottom
-	of the deck
-*/
-void addCard(Card c, Deck d, int pos);		// A
 
-/*
-	remove a card from the deck in position pos
-	e.g:
-	0  -> remove top card
-	1  -> remove the card under the top card
-	4  -> remove the 4th card (0 indexed)
-	-1 -> remove bottom card
-	if pos > size of deck, also remove
-	bottom card
-*/
+// add a card to the deck in position pos
+
+void addCard(Card c, Deck d, int pos);		// T
+
+
+// remove a card from the deck in position pos
 Card removeCard(Deck d, int pos);			// T
 
 /*
@@ -108,8 +103,14 @@ Deck copyDeck(Deck d);						// T
 // print out entire deck to stdin
 void printDeck(Deck d);						// A
 
-// print a card
+// print a standard card
 void printCard(Card c);						// A
+
+// print cards with literal values
+void printC(Card c);
+
+// print deck with literal values
+void printD(Deck d);
 
 // free all memory used for the deck
 void freeDeck(Deck d);						// F
@@ -161,6 +162,10 @@ void shuffle(Deck d);						// TESTING NEEDED
 	return the card at position pos in deck d
 */
 Card getCard(Deck d, int pos);				// TESTING NEEDED
+
+
+// create a deck for testing purposes
+Deck newTestDeck(void);
 
 #endif
 
