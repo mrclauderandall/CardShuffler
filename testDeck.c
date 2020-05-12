@@ -1,11 +1,14 @@
 // test file for deck implementation
 // written by FyRel
 
-#include "deck.h"
-#include "riffle.h"
-#include "random.h"
+#include <stdio.h>
+#include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
+
+#include "deck.h"
+//#include "random.h"
+
 
 // test function definitions
 void test_addCard(void);
@@ -13,32 +16,17 @@ void test_removeCard(void);
 void shuffle_test(void);
 
 int main(void) {
+	Deck d1 = newStandardDeck(); 	// uses: newEmptyDeck, newCard, addCard
+	Deck d2 = newStandardDeck();
 
-	// create a new deck
-	Deck d = newStandardDeck();
-	Deck D = newStandardDeck();
-	int i;
+	//printDeck(d1);					// uses: printCard
+	assert(equivalentDecks(d1, d2));
+	Card c = removeCard(d1, 5);			// uses: -
+	assert(!equivalentDecks(d1, d2));
 
-	// show deck
-	printf("original deck:\n");
-	printDeck(d);
+	freeDeck(d1);					// uses: freeCard
+	freeDeck(d2);					// uses: freeCard
 
-	// riffle shuffle deck
-	for (i = 0; i < 10000; i++) {
-		riffleHuman(d);
-	}
-
-	// show deck
-	printf("\nsame deck after %d shuffle:\n", i);
-	printDeck(d);
-
-	// print the order retainment of the shuffled deck
-	int order = orderRetainment(D, d);
-	printf("order = %d\n", order);
-	
-	// free deck
-	freeDeck(d);
-	freeDeck(D);
 
 	return 0;
 }
@@ -52,56 +40,18 @@ void shuffle_test(void) {
 
 
 
+void test_newCard(void) {
+	/*
+	Inputs: 
+		suit	any int
+		value	any int
+
+	Outputs:
+		c 		Card with value and suit set
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	*/
+}
 
 
 
@@ -111,97 +61,6 @@ void shuffle_test(void) {
 
 
 /*
-								SPACE
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 void test_addCard(void) {
 
 	// CASE 1: empty deck
@@ -286,7 +145,7 @@ void test_removeCard(void) {
 }
 
 
-
+*/
 
 
 

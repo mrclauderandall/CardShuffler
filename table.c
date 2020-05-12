@@ -1,7 +1,29 @@
 // implamentation of table 
 
-#include "table.h"
+#include <stdio.h>
 #include <string.h>
+
+#include "deck.h"
+#include "table.h"
+
+struct player {
+	char *name;
+	int chips;
+	Player next;
+	Deck hand;
+	int hand_size;	// 2 for texas hold em, 4 for omaha (fuck omaha)
+	int button;	// 0 = utg, 1 = utg+1, 2 = utg+2,..., (nPlayers - 2) = SB, (nPlayers - 1) = BB
+	int bet;	// amount of bet for current round, reset to zero after each round
+};
+
+struct table {
+	Player utg;
+	int nPlayers, BB, SB, Ante;
+	Deck mainDeck, communityCards;
+	int street;	// 0 = preflop, 1 = flop, 2 = turn, 3 = river, 4 = showdown
+	int pot;
+	int bet;	// bet amount for current street
+};
 
 Player newPlayer(char *name, int chips) {
 	Player p = malloc(sizeof(*p));

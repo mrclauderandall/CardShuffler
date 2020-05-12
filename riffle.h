@@ -1,5 +1,5 @@
 // riffle function definitions
-// written by FyRel
+// written by Josh and Claude
 
 
 

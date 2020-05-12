@@ -5,7 +5,9 @@
 	main game file
 */
 
-//#include "deck.h"
+#include <stdio.h>
+
+#include "deck.h"
 #include "table.h"
 
 
@@ -91,13 +93,10 @@ int main(void) {
 
 
 
-
-
-
-
+/*
 void test_dealCards(void) {
 	
-		/* !!! CASE 0 !!! */
+
 	// deal cards to an empty table
 	Table empty_table = newTable();
 	printTable(empty_table);
@@ -105,12 +104,13 @@ void test_dealCards(void) {
 	printTable(empty_table);
 	freeTable(empty_table);
 
-		/* !!! CASE 1 !!! */ 
 
-		/* !!! CASE 2 !!! */ 
-
-		/* !!! CASE 3 !!! */ 
 }
+*/
+
+
+
+
 
 
 
