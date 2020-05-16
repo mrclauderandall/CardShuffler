@@ -96,7 +96,7 @@ void test_getCard(void) {
 }
 
 
-
+/*
 
 void test_addCard(void) {
 
@@ -152,7 +152,7 @@ void test_addCard(void) {
 
 
 
-/*
+
 void test_removeCard(void) {
 
 	// CASE 1: attempt to remove a card from an empty deck

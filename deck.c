@@ -493,7 +493,7 @@ void printDeck(Deck d) {
 }
 
 void printCard(Card c) {
-	if (c == NULL) printf("NULL\n");
+	if (c == NULL) printf("NULL");
 	
 	switch (valueCard(c)) {
 		case 0:
@@ -536,7 +536,7 @@ void printCard(Card c) {
 		case 3:
 			printf("s"); break;
 		default:
-			printf("!suit error!\n");
+			printf("!suit error!");
 	}
 }
 
