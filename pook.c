@@ -6,107 +6,96 @@
 */
 
 #include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
 
 #include "deck.h"
 #include "table.h"
 
 
-void test_dealCards(void);
+// helper functions
+void invokeMove();
 
 
 int main(void) {
 	
-	//test_dealCards();
-
-
-
-
-
-	// create 5 new players
-	Player claude = newPlayer("Claude", 1000);
-	Player josh = newPlayer("Josh", 3);
-	Player pat = newPlayer("Pat", 9000);
-	Player phil = newPlayer("Phil Ivey", 400);
-	Player dan = newPlayer("Daniel Negroonoo", 8999);
+	// declare variables
+	int nplayers, i, chips, round, sb, bb, ante, move, bet;
+	bool playFlag, turnFlag;
+	char name[256];
+	Player p;
 
 	// create a new table
 	Table t = newTable();
 
-	// add players to the table
-	addPlayer(claude, t);
-	addPlayer(josh, t);
-	addPlayer(pat, t);
-	addPlayer(phil, t);
-	addPlayer(dan, t);
+	/*    !!!   create players   !!!    */
+	// get number of players
+	printf("players: ");
+	scanf("%d", &nplayers);
 
-	// print table
-	printTable(t);
+	// get starting chips
+	printf("starting chips: ");
+	scanf("%d", &chips);
 
-	// deal cards to the players
-	dealCards(t);
+	// set blinds
+	printf("enter blinds and ante (bb sb ante): ");
+	scanf("%d %d %d", &bb, &sb, &ante);
+	setBlinds(t, bb, sb, ante);
 
-	// print table
-	printTable(t);
+	// create players
+	for (i = 0; i < nplayers; i++) {
+		// get player name
+		printf("enter name for player %d: ", i);
+		scanf("%s", name);
+		
+		// create player
+		p = newPlayer(name, chips);
 
-	// remove players from the table
-	removePlayer(t, 3);	// 5	
-	removePlayer(t, 2);	// 4
-	removePlayer(t, 0);	// 3
-	removePlayer(t, 1);	// 2
-	removePlayer(t, 0);	// 1
+		// add player to table
+		addPlayer(p, t);
+		printf("%s has joined the table\n", name);
+
+		// reset player name string
+		memset(name, 0, 256);
+	}
+
+	printf("\n\n\n");
+
+	// create a deck of cards
+	Deck d = newStandardDeck();
+
+	// initalize flags and variables
+	round = 0;
+	playFlag = true;
+
+
+	/*
+		loop and play an entire round
+		until a player quits the games
+	*/
+	while(playFlag) {
+
+		// start a new round
+		initRound(t);
+
+		playStreets(t);
+
+
+		// check if player wants to play the next round
+		if (round >= 0) {
+			playFlag = false;
+		}
+		round++;
+	}
 
 	// free table
 	freeTable(t);
-
-
 }
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-void test_dealCards(void) {
-	
-
-	// deal cards to an empty table
-	Table empty_table = newTable();
-	printTable(empty_table);
-	dealCards(empty_table);
-	printTable(empty_table);
-	freeTable(empty_table);
-
-
-}
-*/
 
 
 
