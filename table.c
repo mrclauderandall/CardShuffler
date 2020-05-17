@@ -499,6 +499,7 @@ int humanMove(Table t, Player p) {
 	int move = -1;
 	char key;
 	bool setFlag = false;
+	int prints = 0;
 
 	// check valid street and player not folded
 	if (t->street == -1 || p->active != true) {
@@ -519,24 +520,45 @@ int humanMove(Table t, Player p) {
 
 	// print legal moves
 	printf("legal moves:\n");
-	printf("    F    Fold\n");
+	printf("    F  Fold         ");
+	prints++;
 
 	if (p->bet >= t->bet) {
-		printf("    C    Check\n");
+		printf("    C  Check        ");
+		prints++;
 		check_legal = true;
 	} else if (p->chips > t->bet) {
-		printf("    C    Call    (%d)\n", call_bet);
+		printf("    C  Call    (%d) ", call_bet);
 		check_legal = false;
+		prints++;
+	}
+
+	if (prints > 1) {
+		printf("\n");
+		prints = 0;
 	}
 
 	if (p->chips > 0 && t->bet == 0) {
-		printf("    B    Bet\n");
+		printf("    B  Bet          ");
+		prints++;
 	} else if (p->chips > t->bet) {
-		printf("    R    Raise\n");
+		printf("    R  Raise        ");
+		prints++;
+	}
+
+	if (prints > 1) {
+		printf("\n");
+		prints = 0;
 	}
 
 	if (p->chips > 0) {
-		printf("    A    All in (%d)\n", p->chips);
+		printf("    A  All in (%d)   ", p->chips);
+		prints++;
+	}
+
+	if (prints > 1) {
+		printf("\n");
+		prints = 0;
 	}
 
 	while (!setFlag) {

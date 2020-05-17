@@ -20,9 +20,10 @@ void invokeMove();
 int main(void) {
 	
 	// declare variables
-	int nplayers, i, chips, round, sb, bb, ante, move, bet;
+	int nplayers, i, chips, round, sb, bb, ante;
 	bool playFlag, turnFlag;
 	char name[256];
+	char quit;
 	Player p;
 
 	// create a new table
@@ -79,13 +80,6 @@ int main(void) {
 		initRound(t);
 
 		playStreets(t);
-
-
-		// check if player wants to play the next round
-		if (round >= 0) {
-			playFlag = false;
-		}
-		round++;
 	}
 
 	// free table

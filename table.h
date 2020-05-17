@@ -241,6 +241,7 @@ void playerBet(Table t, Player p, int bet);
 		3		B		bet
 		4		R		raise
 		5		A		all in
+		6		S 		show hand
 
 */
 
