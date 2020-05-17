@@ -81,13 +81,14 @@ void playStreets(Table t) {
 			for (i = 0; i < t->nPlayers; i++) {
 				cur->bet = 0;
 				cur->turns = 0;
+				cur = cur->next;
 			}
 		}
 		
-		printf("\n\n\n\n");
-		printf("street %d starting\n", street);
-		printTable(t);
-		printf("\n\n");
+		//printf("\n\n\n\n");
+		//printf("street %d starting\n", street);
+		//printTable(t);
+		//printf("\n\n");
 
 
 		// check valid street
@@ -126,10 +127,10 @@ void playStreets(Table t) {
 			// check if any more players need to have a turn
 			if (!streetActive(t)) {
 				turnFlag = false;
-				printf("\n\n");
-				printf("street %d finished\n", street);
-				printTable(t);
-				printf("\n\n\n\n");
+				//printf("\n\n");
+				//printf("street %d finished\n", street);
+				//printTable(t);
+				//printf("\n\n\n\n");
 			}
 		}
 
@@ -336,13 +337,15 @@ bool streetActive(Table t) {
 		exit(1);
 	}
 
+	// check if only 1 player remains
+	if (t->activeP < 2) return false;
+
 	// declare variables
 	Player cur = t->utg;
-	int most_turns = cur->turns;
 
 	// check how many turns each player has had 
 	for (int i = 0; i < t->nPlayers; i++) {
-		if (cur->turns < most_turns && cur->active) {
+		if (cur->turns < 1 && cur->active) {
 			return true;
 		}
 
@@ -362,7 +365,6 @@ void collectBlinds(Table t) {
 	Player cur = t->utg;
 	for (int i = 0; i < nPlayers(t); i++) {
 		if (cur->button == nPlayers(t) - 1) {
-			//playerBet(t, cur, bigBlind(t));
 			// remove chips from player
 			cur->chips -= t->BB;
 
@@ -376,7 +378,6 @@ void collectBlinds(Table t) {
 			t->bet = t->BB;
 			
 		} else if (cur->button == nPlayers(t) - 2) {
-			//playerBet(t, cur, smallBlind(t));
 			// remove chips from player
 			cur->chips -= t->SB;
 
@@ -386,7 +387,6 @@ void collectBlinds(Table t) {
 			// set players bet amount
 			cur->bet = t->SB;
 		} else {
-			//playerBet(t, cur, ante(t));
 			// remove chips from player
 			cur->chips -= t->Ante;
 
@@ -435,6 +435,12 @@ void playerBet(Table t, Player p, int bet) {
 		printf("playerBet: bet amount must be greater than or"
 			"equal to the largest bet of the current street\n");
 		return;
+	} else if ((p->bet + bet) > t->bet) {
+		// reset player turns
+		Player cur = t->utg;
+		for (int i = 0; i < t->nPlayers; i++) {
+			cur->turns = 0;
+		}
 	}
 
 	// remove chips from player
@@ -448,12 +454,6 @@ void playerBet(Table t, Player p, int bet) {
 
 	// set bet amount for table
 	t->bet = p->bet;
-
-	// reset all player turns
-	Player cur = t->utg;
-	for (int i = 0; i < t->nPlayers; i++) {
-		cur->turns = 0;
-	}
 
 	// incrament player turns
 	p->turns++;
