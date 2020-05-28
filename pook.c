@@ -8,14 +8,16 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
+#include <unistd.h>
 
 #include "deck.h"
 #include "table.h"
 
 
 // helper functions
-void invokeMove();
-
+//void invokeMove(void);
+void printStartMenu(void);
+void clear(int n);
 
 int main(void) {
 	
@@ -28,6 +30,9 @@ int main(void) {
 
 	// create a new table
 	Table t = newTable();
+
+	// print start menu
+	printStartMenu();
 
 	/*    !!!   create players   !!!    */
 	// get number of players
@@ -87,8 +92,16 @@ int main(void) {
 }
 
 
+void printStartMenu(void) {
+	printf("ahhhhh fug, I think im gonna");
+	
+	for (int i = 0; i < 3; i++) {
+		sleep(1);
+		printf(".");
+	}
 
-
+	printf("POOOOOOOOOOOOK\n");
+}
 
 
 

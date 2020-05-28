@@ -35,8 +35,8 @@ struct table {
 /* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~  ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
 
 void invokeAction(Table t, Player p, int move);
-
-
+void nl(int n);
+void asciiTable(Table t);
 
 
 
@@ -69,9 +69,8 @@ void playStreets(Table t) {
 
 
 	while (street < 4) {
-		
 
-
+		// reset player and table data for the new street
 		if (street > 0) {
 			// reset bet amount
 			t->bet = 0;
@@ -84,12 +83,8 @@ void playStreets(Table t) {
 				cur = cur->next;
 			}
 		}
-		
-		//printf("\n\n\n\n");
-		//printf("street %d starting\n", street);
-		//printTable(t);
-		//printf("\n\n");
 
+		// print ascii table
 
 		// check valid street
 		if (street == 0) {
@@ -127,10 +122,6 @@ void playStreets(Table t) {
 			// check if any more players need to have a turn
 			if (!streetActive(t)) {
 				turnFlag = false;
-				//printf("\n\n");
-				//printf("street %d finished\n", street);
-				//printTable(t);
-				//printf("\n\n\n\n");
 			}
 		}
 
@@ -209,11 +200,54 @@ Player showdownWinner(Table t) {
 	return winner;
 }
 
+void showHand(Player p) {
+	printf("hand: ");
+	printDeck(p->hand);
+	printf("\n");
+}
 
 
 
+void nl(int n) {
+	for (int i = 0; i < n; i++) {
+		printf("\n");
+	}
+}
 
+void asciiTable(Table t) {
+	// check valid table
+	if (t == NULL) {
+		printf("asciiTable: must pass valid table\n");
+		exit(1);
+	}
 
+	// print game title
+	printf("POOK by J+C\n");
+	
+	// print street name
+	switch (t->street) {
+		case -1:
+			printf("Pre-Flop");
+			break;
+		case 0:
+			printf("Flop");
+			break;
+		case 1:
+			printf("Turn");
+			break;
+		case 2:
+			printf("River");
+			break;
+		case 3:
+			printf("Showdown\n");		
+			break;
+		default:
+			printf("asciiTable: invalid street = %d\n", street);
+	}
+
+	// print community cards
+
+}
 
 
 
@@ -490,7 +524,7 @@ int humanMove(Table t, Player p) {
 
 	// check valid table and player
 	if (t == NULL || p == NULL) {
-		printf("playerMove: must pass valid table\n");
+		printf("humanMove: must pass valid table\n");
 		exit(1);
 	}
 
@@ -953,14 +987,6 @@ void printPlayer(Player p) {
 	// print players chips
 	printf("chips: %d\n", p->chips);
 
-/*
-	// print the name of the player next to player p
-	if (p->next == NULL) {
-		printf("next player: X\n");
-	} else {
-		printf("next player: %s\n", p->next->name);
-	}
-*/
 	// print the players hand
 	printf("hand: ");
 	printDeck(p->hand);

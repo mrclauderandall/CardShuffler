@@ -257,3 +257,320 @@ Card removeSpecificCard(Deck d, int value, char suit) {
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*  ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ player ADT functions ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+/*  ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/*
+	create a new player with the given name
+*/
+Player newPlayer(char *name);
+
+/*
+	free all memory used for player p
+*/
+void freePlayer(Player p);
+
+
+// set ///////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+	set the amount of chips for a player
+*/
+void setChips(Player p, int chips);
+
+/*
+	set the button of a player
+*/
+void setPlayerButton(Player p, int button);
+
+/*
+	set the players bet for the current street
+*/
+void setPlayerBet(Player p, int bet);
+
+/*
+	set the amount of turns a player has had this street
+*/
+void setPlayerTurns(Player p, int turns);
+
+/*
+	set the players active status
+*/
+void setPlayerActive(Player p, bool flag);
+
+// get ///////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+	return the players name
+*/
+const char *playerName(Player p);
+
+/*
+	return the players hand
+*/
+Deck playerHand(Player p);
+
+/*
+	return the players chips
+*/
+int playerChips(Player p);
+
+/*
+	return the position of a player
+*/
+int playerPos(Player p);
+
+/*
+	return the button of a player
+*/
+int playerButton(Player p);
+
+/*
+	return the players bet for the current stree	
+*/
+int playerBet(Player p);
+
+/*
+	return the amount of turns a player has had this street
+*/
+int playerTurns(Player p);
+
+/*
+	return the players active status
+*/
+bool playerActive(Player p);
+
+/*  ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+/* ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ table ADT functions  ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+/*  ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ */
+
+/*
+	create a new empty table
+*/
+Table newTable(void);
+
+/*
+	free all memory used for a table
+*/
+void freeTable(Table t);
+
+// set ///////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+	add a player to a table
+	and set their position
+*/
+void addPlayer(Table t, Player p);
+
+/*
+	set the amount of chips in the pot
+*/
+void setPot(Table t, int chips);
+
+/*
+	set the current street
+*/
+void setStreet(Table t, int street);
+
+/*
+	set the blind amounts
+*/
+void setBlinds(Table t, int b, int s, int a);
+
+/*
+	set the highest bet amount for the current street
+*/
+void setTableBet(Table t, int bet);
+
+/*
+	set the amount of rounds played
+*/
+void setRounds(Table t, int rounds);
+
+
+// get ///////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+	return number of players at table
+*/
+int nPlayers(Table t);
+
+/*
+	return the number of chips in the pot
+*/
+int pot(Table t);
+
+/*
+	return the current street
+*/
+void street(Table t);
+
+/*
+	return the big bling for the table
+*/
+int bigBlind(Table t);
+
+/*
+	return the small bling for the table
+*/
+int smallBlind(Table t);
+
+/*
+	return the big bling for the table
+*/
+int ante(Table t);
+
+/*
+	return the highest bet amount for the current street
+*/
+int betTable(Table t);
+
+/*
+	return the amount of rounds played
+*/
+int rounds(Table t);
+
+/*
+	return the main deck for the table
+*/
+Deck tableDeck(Table t);
+
+/*
+	return the community cards for the table
+*/
+Deck tableCC(Table t);
+
+/*
+	return the player in position pos
+*/
+Player getPlayer(Table t, int pos);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+	remove a player from a table
+*/
+void removePlayer(Table t, int i);
+
+/*
+	add chips to the tables pot
+*/
+void addPotChips(Table t, int chips);
+
+/*
+	remove all chips from the pot and return
+	the number of chips in the pot
+*/
+int removePotChips(Table t);
+
+// return table data functions 
+/*
+	return number of players on the table
+*/
+int nPlayers(Table t);
+
+/*
+	return current street
+*/
+int street(Table t);
+
+/*
+	return number of rounds played
+*/
+int rounds(Table t);
+
+/*
+	return player i
+*/
+Player tablePlayer(Table t, int i);
+
+/*
+	return the button of player i
+*/
+int playerButton(Table t, int i);
+
+/*
+	return the index of the player whos 
+	turn it currently is
+*/
+int currentPlayer(Table t);
+
+/*
+	return the number of turns player i has
+	had during the current street
+*/
+int playerTurns(Table t, )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -176,7 +176,7 @@ void printTable(Table t);
 
 
 
-
+void showHand(Player p);
 
 
 Player showdownWinner(Table t);

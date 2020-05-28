@@ -143,12 +143,22 @@ void shuffle(Deck d);
 */
 void printCard(Card c);
 
+/*
+	print a standard card with ascii art 
+*/
+void asciiCard(Card c);
+
 /* 
 	print out an entire standard deck
 	from top to bottom
 	function does not print a new line
 */
 void printDeck(Deck d);
+
+/*
+	print a standard deck with ascii art 
+*/
+void asciiDeck(Deck d);
 
 /* 
 	print cards with intager values and suits

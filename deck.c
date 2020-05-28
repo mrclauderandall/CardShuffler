@@ -540,6 +540,26 @@ void printCard(Card c) {
 	}
 }
 
+void asciiCard(Card c) {
+	printCard(c);
+}
+/*
+void asciiTableCards(Deck d) {
+	if (d->street == -1) return;
+
+	if (d->street == 0) {
+		printf("┌─────────┐   ┌─────────┐   ┌─────────┐\n
+				│%d       │   │%d       │   │%d       │\n
+				│         │   │         │   │         │\n
+				│         │   │         │   │         │\n
+				│    %c    │   │    %c    │   │    %c    │\n
+				│         │   │         │   │         │\n
+				│         │   │         │   │         │\n
+				│       %d│   │       %d│   │       %d│\n
+				└─────────┘   └─────────┘   └─────────┘\n", 9, 3, 5, );
+	} 
+}
+*/
 void printC(Card c) {
 	assert (c != NULL);
 	printf("%d%d", c->value, c->suit);
